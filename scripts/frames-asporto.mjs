@@ -15,8 +15,8 @@ const VID = 'public/video'
 const TMP = '/tmp/crm-asporto'
 
 /* I momenti del filmato in cui si vede una schermata intera, nell'ordine in
-   cui compaiono nella scheda. `full` è il fotogramma preso per intero: vale
-   per la copertina, dove non c'è una finestra da ritagliare. */
+   cui compaiono nella scheda. La copertina del video non nasce qui: è
+   un'immagine a sé, in desing-references/originals/asporto-cover.png. */
 const shots = [
   { t: 15, name: 'asporto-cliente' },
   { t: 95, name: 'asporto-prodotto' },
@@ -26,7 +26,6 @@ const shots = [
   { t: 200, name: 'asporto-menu' },
   { t: 212, name: 'asporto-orari' },
 ]
-const cover = { t: 297, name: 'asporto-cover-logo', full: true, widths: [640, 960, 1280] }
 const WIDTHS = [800, 1200, 1600]
 
 rmSync(TMP, { recursive: true, force: true })
@@ -60,18 +59,14 @@ function windowBox(gray) {
   return { x: cols[0], y: rows[0], w: cols[cols.length - 1] - cols[0] + 1, h: rows[rows.length - 1] - rows[0] + 1 }
 }
 
-for (const shot of [...shots, cover]) {
+for (const shot of shots) {
   const raw = join(TMP, `${shot.name}.png`)
-  if (shot.full) {
-    ff(['-ss', String(shot.t), '-i', SRC, '-frames:v', '1', raw, '-y'])
-  } else {
-    const gray = join(TMP, `${shot.name}.gray`)
-    ff(['-ss', String(shot.t), '-i', SRC, '-frames:v', '1', '-pix_fmt', 'gray', '-f', 'rawvideo', gray, '-y'])
-    const b = windowBox(gray)
-    ff(['-ss', String(shot.t), '-i', SRC, '-frames:v', '1',
-      '-vf', `crop=${b.w}:${b.h}:${b.x}:${b.y}`, raw, '-y'])
-  }
-  for (const w of shot.widths || WIDTHS) {
+  const gray = join(TMP, `${shot.name}.gray`)
+  ff(['-ss', String(shot.t), '-i', SRC, '-frames:v', '1', '-pix_fmt', 'gray', '-f', 'rawvideo', gray, '-y'])
+  const b = windowBox(gray)
+  ff(['-ss', String(shot.t), '-i', SRC, '-frames:v', '1',
+    '-vf', `crop=${b.w}:${b.h}:${b.x}:${b.y}`, raw, '-y'])
+  for (const w of WIDTHS) {
     execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '80', '--resampleWidth', String(w),
       raw, '--out', join(IMG, `${shot.name}-${w}.jpg`)], { stdio: 'ignore' })
     execFileSync('cwebp', ['-q', '80', '-resize', String(w), '0', raw, '-o', join(IMG, `${shot.name}-${w}.webp`)],

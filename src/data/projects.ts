@@ -196,9 +196,10 @@ export const projects: Project[] = [
     ],
     video: {
       src: '/video/asporto-presentazione.mp4',
-      poster: '/img/asporto-cover-logo',
+      poster: '/img/asporto-cover',
       posterWidths: [640, 960, 1280],
-      posterAlt: 'Titolo «Ordini da asporto» e marchio CRM LAB, bianchi su fondo scuro.',
+      posterAlt:
+        'Un telefono con la schermata d’ordine del locale, accanto a una pizza nel cartone e alla comanda stampata.',
       duration: '4:58',
     },
     shots: [
