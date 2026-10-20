@@ -1,0 +1,26 @@
+node_modules
+dist
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example
+tsconfig.tsbuildinfo
+
+# Video di presentazione: le schermate e il filmato si rigenerano con
+# `npm run capture` e `npm run render` dentro video/, non vanno versionati.
+video/node_modules
+video/out
+video/public/shots
+
+# Documenti interni: inventario privacy, bozze delle informative,
+# domande aperte. Non fanno parte del sito pubblicato.
+internal
+
+# Local development and generated review materials
+/.claude/
+/.taste-skill/
+/desing-references/
+/graphify-out/
+/internal/
+/video/

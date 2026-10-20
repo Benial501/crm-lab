@@ -1,0 +1,134 @@
+/* ---------------------------------------------------------------
+   Fila scorrevole — solo su schermo stretto.
+
+   Su telefono una pagina come questa diventa una colonna lunghissima:
+   chi arriva non vede mai due cose insieme e non capisce quante sono.
+   Qui l'elenco si ricompone in una striscia che si scorre con il
+   pollice, una scheda alla volta, con il conto sotto. Da tablet in su
+   non esiste: questo foglio vive tutto dentro la media query.
+
+   La doppia classe (.rail.rail) serve a vincere senza !important sul
+   display: grid che l'elenco ha già nel foglio della sua sezione.
+   --------------------------------------------------------------- */
+@media (max-width: 859px) {
+  .rail-wrap {
+    position: relative;
+  }
+
+  .rail.rail {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0.75rem;
+    /* Da bordo a bordo: la striscia esce dai margini della pagina e se
+       li riprende come spazio interno, così la prima scheda resta
+       allineata al testo e l'ultima non finisce incollata al vetro. */
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 0.25rem var(--gutter) 0.25rem;
+    border: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline-start: var(--gutter);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .rail.rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Ogni voce diventa una scheda: larga quasi quanto lo schermo, con
+     quel tanto di scheda successiva che sbuca a dire «ce n'è ancora». */
+  .rail.rail > * {
+    flex: 0 0 min(86%, 24rem);
+    min-width: 0;
+    scroll-snap-align: start;
+    padding: var(--pad);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  /* Famiglia con un solo pacchetto: resta una scheda come le altre,
+     ma prende tutta la larghezza — non c'è niente accanto da sbirciare. */
+  .rail.rail > :only-child {
+    flex-basis: 100%;
+  }
+
+  .on-light .rail.rail > * {
+    background: #fff;
+    border-color: var(--hairline-light);
+  }
+
+  /* ---------- Il conto sotto la striscia ---------- */
+  .rail-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .rail-nav__count {
+    font-size: var(--step-small);
+    color: var(--on-dark-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rail-nav__count b {
+    font-weight: 500;
+    color: var(--on-dark);
+  }
+
+  .on-light .rail-nav__count {
+    color: var(--on-light-soft);
+  }
+
+  .on-light .rail-nav__count b {
+    color: var(--on-light);
+  }
+
+  .rail-dots {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  /* Ogni indicatore resta un bersaglio touch da almeno 44 × 44px. */
+  .rail-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .rail-dot::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hairline-strong);
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  .rail-dot--on::before {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+
+  .on-light .rail-dot::before {
+    background: rgba(11, 12, 15, 0.22);
+  }
+
+  .on-light .rail-dot--on::before {
+    background: var(--accent-deep);
+  }
+}

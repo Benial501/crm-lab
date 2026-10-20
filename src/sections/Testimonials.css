@@ -1,0 +1,41 @@
+/* ---------------------------------------------------------------
+   Testimonianze.
+   La sezione esiste solo quando c'è almeno una voce reale e
+   autorizzata: finché testimonials.ts è vuoto non viene renderizzata.
+   --------------------------------------------------------------- */
+.principles__list {
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 1px solid var(--hairline);
+}
+
+@media (min-width: 760px) {
+  .principles__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(1.5rem, 4vw, 4rem);
+  }
+}
+
+.principle {
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.principle__body {
+  font-size: var(--step-lead);
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  max-width: 34ch;
+}
+
+.principle__title {
+  margin-top: 1.2rem;
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+
+.principle__role {
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+}

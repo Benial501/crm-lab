@@ -1,0 +1,143 @@
+/* ---------------------------------------------------------------
+   Servizi — quattro righe quiete, separate da una linea sottile.
+   Niente campiture di colore, niente schede con l'icona in un
+   riquadro: il segno blu apre la riga e basta.
+   --------------------------------------------------------------- */
+.services__list {
+  border-top: 1px solid var(--hairline);
+}
+
+.srv {
+  display: grid;
+  gap: 1.5rem clamp(1.5rem, 3vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: clamp(2rem, 3.5vw, 3rem);
+  border-bottom: 1px solid var(--hairline);
+}
+
+@media (min-width: 960px) {
+  .srv {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 4.4fr) minmax(0, 3.6fr);
+    align-items: start;
+  }
+}
+
+.srv__glyph {
+  margin-bottom: 0.9rem;
+}
+
+.srv__title {
+  font-size: var(--step-lead);
+  font-weight: 500;
+}
+
+.srv__summary {
+  margin-top: 0.6rem;
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+  max-width: 40ch;
+}
+
+.srv__ask {
+  margin-top: 1.4rem;
+  border: 0;
+  background: none;
+  padding: 0 0 3px;
+  cursor: pointer;
+}
+
+.srv__sub {
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--on-dark-soft);
+  margin-bottom: 0.4rem;
+}
+
+.srv__sub--spaced {
+  margin-top: 1.4rem;
+}
+
+.srv__problem p {
+  max-width: 48ch;
+  font-size: var(--step-body);
+  line-height: 1.65;
+}
+
+.srv__includes ul {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.srv__includes li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+}
+
+.srv__includes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+/* ---------------------------------------------------------------
+   Telefono: le quattro aree diventano quattro schede affiancate.
+   Si vedono una alla volta, con il conto sotto, invece di scorrere
+   per quattro schermate senza sapere quante ne restano.
+   --------------------------------------------------------------- */
+@media (max-width: 859px) {
+  .services__list.rail > .srv {
+    display: block;
+    padding-block: var(--pad);
+  }
+
+  .rail .srv__problem,
+  .rail .srv__includes {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .rail .srv__ask {
+    margin-top: 1.25rem;
+  }
+
+  /* La riga da aprire: tocco alto come un bottone, freccia che ruota. */
+  .srv__fold-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 44px;
+    font-size: var(--step-small);
+    font-weight: 500;
+    color: var(--on-dark-soft);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .srv__fold-head::-webkit-details-marker {
+    display: none;
+  }
+
+  .srv__fold-mark {
+    flex: none;
+    color: var(--accent-bright);
+    transform: rotate(90deg);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .srv__fold[open] .srv__fold-mark {
+    transform: rotate(-90deg);
+  }
+
+  .srv__fold-body {
+    padding-top: 0.5rem;
+  }
+}

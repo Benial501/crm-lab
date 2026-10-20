@@ -1,0 +1,337 @@
+/* ---------------------------------------------------------------
+   Come si sviluppa un progetto.
+   Cinque righe alternate: a un lato la fase, all'altro il frammento
+   d'interfaccia con cui quella fase si fa davvero.
+   --------------------------------------------------------------- */
+.process__list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.phase {
+  display: grid;
+  gap: 1.75rem clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: clamp(2rem, 3.5vw, 3rem);
+  border-bottom: 1px solid var(--hairline);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .phase {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  /* Le fasi pari rovesciano la riga: lo schema non è una colonna sola. */
+  .phase:nth-child(even) .phase__say {
+    order: 2;
+  }
+}
+
+.phase__n {
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--accent-bright);
+  font-variant-numeric: tabular-nums;
+}
+
+.phase__title {
+  margin-top: 0.35rem;
+  font-size: var(--step-lead);
+  font-weight: 500;
+}
+
+.phase__body {
+  margin-top: 0.8rem;
+  max-width: 48ch;
+  font-size: var(--step-body);
+  line-height: 1.7;
+  color: var(--on-dark-soft);
+}
+
+.phase__output {
+  margin-top: 1.3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+  max-width: 48ch;
+  font-size: var(--step-body);
+}
+
+.phase__output span {
+  display: block;
+  color: var(--on-dark-soft);
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- I frammenti d'interfaccia ----------
+   Sono schermate applicative: bordi quieti ed etichette piccole sono
+   corretti qui dentro, e `data-ui` lo dichiara. */
+.art {
+  background: #fff;
+  color: #101319;
+  font-size: var(--step-small);
+  line-height: 1.45;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.art__bar {
+  padding: 0.7rem 0.9rem;
+  background: #f1f3f6;
+  border-bottom: 1px solid #dfe3e9;
+  font-weight: 500;
+}
+
+/* Note dell'analisi */
+.art__notes li {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid #eceff3;
+}
+
+.art__notes li:last-child {
+  border-bottom: 0;
+}
+
+.art__q {
+  color: #5b616e;
+}
+
+.art__a {
+  font-weight: 500;
+}
+
+/* Schema delle schermate */
+.art--wire {
+  padding: 0.9rem;
+  background: #f6f7f9;
+}
+
+.art__wire-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.9rem;
+}
+
+.wf {
+  display: block;
+  background: #c8cedb;
+}
+
+.wf--logo {
+  width: 3.2rem;
+  height: 0.7rem;
+  background: #101319;
+}
+
+.wf--nav {
+  width: 2.2rem;
+  height: 0.5rem;
+}
+
+.wf--btn {
+  width: 4.2rem;
+  height: 1.5rem;
+  margin-left: auto;
+  background: #2550e8;
+}
+
+.wf--big {
+  width: 7rem;
+  height: 2rem;
+  margin-left: 0;
+}
+
+.art__wire-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.9rem;
+}
+
+.art__wire-col {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+}
+
+.wf--h1 {
+  height: 1.3rem;
+  background: #101319;
+}
+
+.wf--line {
+  height: 0.5rem;
+}
+
+.wf--short {
+  width: 60%;
+}
+
+.art__wire-media {
+  background: #9aa3b5;
+  min-height: 7rem;
+}
+
+.art__wire-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+
+.wf--block {
+  height: 2.6rem;
+}
+
+/* Tabella degli stati */
+.art__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.art__table th,
+.art__table td {
+  padding: 0.55rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid #eceff3;
+  white-space: nowrap;
+}
+
+.art__table thead th {
+  font-weight: 500;
+  color: #5b616e;
+}
+
+.art__table tbody tr:last-child th,
+.art__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.cmp {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  background: #2550e8;
+  color: #fff;
+  font-weight: 500;
+}
+
+.cmp--hover {
+  background: #1a3cbb;
+}
+
+.cmp--focus {
+  background: #1a3cbb;
+  outline: 3px solid #7a8aff;
+  outline-offset: 2px;
+}
+
+.cmp--off {
+  background: #c8cedb;
+  color: #4b5160;
+}
+
+/* Verifiche */
+.art__checks li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid #eceff3;
+}
+
+.art__note {
+  padding: 0.8rem 0.9rem;
+  background: #f1f3f6;
+  color: #5b616e;
+  font-size: var(--step-small);
+  line-height: 1.6;
+}
+
+/* Pubblicazione */
+.art__deploy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.art__deploy > div {
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid #eceff3;
+}
+
+.art__deploy > div:nth-child(odd) {
+  border-right: 1px solid #eceff3;
+}
+
+.art__deploy dt {
+  color: #5b616e;
+}
+
+.art__deploy dd {
+  margin: 0.1rem 0 0;
+  font-weight: 500;
+}
+
+.art__handover {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.8rem 0.9rem;
+}
+
+.art__handover li {
+  padding-left: 1rem;
+  position: relative;
+  color: #5b616e;
+}
+
+.art__handover li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  background: #2550e8;
+}
+
+/* ---------------------------------------------------------------
+   Telefono: le cinque fasi diventano cinque schede affiancate, in
+   ordine. Il frammento d'interfaccia resta sotto al testo della sua
+   fase, rimpicciolito quel tanto che basta a starci dentro intero.
+   --------------------------------------------------------------- */
+@media (max-width: 859px) {
+  .process__list.rail > .phase {
+    display: block;
+    padding-block: var(--pad);
+  }
+
+  .rail .phase__art {
+    margin-top: 1.5rem;
+  }
+
+  .rail .art {
+    font-size: 0.8125rem;
+  }
+
+  /* Dentro una scheda stretta la tabella va a capo invece di uscire. */
+  .rail .art__table th,
+  .rail .art__table td {
+    white-space: normal;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .rail .art__bar,
+  .rail .art__notes li,
+  .rail .art__checks li,
+  .rail .art__note,
+  .rail .art__deploy > div,
+  .rail .art__handover {
+    padding-inline: 0.7rem;
+  }
+
+  .rail .art__wire-media {
+    min-height: 5rem;
+  }
+}

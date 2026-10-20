@@ -1,0 +1,391 @@
+/* ---------------------------------------------------------------
+   Demo 3 — Bottega, gestionale per un'attività commerciale.
+   Regole da schermata applicativa: pannelli ripetuti, bordi quieti,
+   etichette piccole, una sola tinta d'azione. Nessun colore
+   decorativo: il colore qui porta informazione (stato, picco).
+   --------------------------------------------------------------- */
+.db {
+  --db-bg: #f4f5f7;
+  --db-panel: #ffffff;
+  --db-ink: #101319;
+  --db-soft: #5b616e;
+  --db-line: #e2e5ea;
+  --db-accent: #2550e8;
+
+  background: var(--db-bg);
+  color: var(--db-ink);
+  font-family: "Albert Sans", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.db h1,
+.db h2 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.db__shell {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: 100svh;
+}
+
+/* ---------- Colonna di navigazione ---------- */
+.db__side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  background: #0f1319;
+  color: #d6d9e0;
+}
+
+.db__brand {
+  padding: 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.db__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.db__menu-item {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  border: 0;
+  background: transparent;
+  color: #b7bcc7;
+  font-size: 0.9375rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.db__menu-item:hover {
+  background: #1b2029;
+  color: #fff;
+}
+
+.db__menu-item--on {
+  background: var(--db-accent);
+  color: #fff;
+  font-weight: 500;
+}
+
+.db__menu-item--off {
+  cursor: default;
+  color: #868c99;
+}
+
+.db__menu-item--off:hover {
+  background: transparent;
+  color: #868c99;
+}
+
+.db__user {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0.8rem 0.6rem 0;
+  border-top: 1px solid #242a34;
+  font-size: 0.9375rem;
+}
+
+.db__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: var(--db-accent);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.db__user-role {
+  width: 100%;
+  padding-left: 2.5rem;
+  font-size: 0.8125rem;
+  color: #868c99;
+}
+
+/* ---------- Area di lavoro ---------- */
+.db__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem clamp(1rem, 2.5vw, 2rem) 2.5rem;
+  min-width: 0;
+}
+
+.db__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.db__title {
+  font-size: 1.75rem;
+}
+
+.db__period {
+  color: var(--db-soft);
+  font-size: 0.9375rem;
+}
+
+/* ---------- Indicatori ---------- */
+.db__kpis {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  background: var(--db-line);
+  border: 1px solid var(--db-line);
+}
+
+.db__kpis li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--db-panel);
+}
+
+.db__kpi-label {
+  font-size: 0.8125rem;
+  color: var(--db-soft);
+}
+
+.db__kpi-value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.db__kpi-note {
+  font-size: 0.8125rem;
+  color: var(--db-soft);
+}
+
+.db__kpi-note--up {
+  color: #137a4a;
+}
+
+/* ---------- Pannelli ---------- */
+.db__panel {
+  background: var(--db-panel);
+  border: 1px solid var(--db-line);
+}
+
+.db__panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--db-line);
+}
+
+.db__panel-head h2 {
+  font-size: 1.0625rem;
+}
+
+.db__panel-head p {
+  font-size: 0.8125rem;
+  color: var(--db-soft);
+}
+
+/* ---------- Grafico ---------- */
+.db__chart {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  height: 220px;
+  padding: 1.5rem 1.2rem 0;
+}
+
+.db__bar-wrap {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 0.4rem;
+}
+
+.db__bar {
+  display: block;
+  width: 100%;
+  max-width: 68px;
+  background: #c3ccdf;
+}
+
+.db__bar--peak {
+  background: var(--db-accent);
+}
+
+.db__bar-value {
+  font-size: 0.8125rem;
+  color: var(--db-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.db__bar-label {
+  font-size: 0.8125rem;
+  color: var(--db-soft);
+}
+
+.db__finding {
+  padding: 1rem 1.2rem 1.2rem;
+  max-width: 70ch;
+  color: var(--db-soft);
+}
+
+/* ---------- Tabella ---------- */
+.db__table-wrap {
+  overflow-x: auto;
+}
+
+.db__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.db__table th,
+.db__table td {
+  padding: 0.75rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--db-line);
+  white-space: nowrap;
+}
+
+.db__table thead th {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--db-soft);
+}
+
+.db__table tbody th {
+  font-weight: 500;
+}
+
+.db__table tbody tr:last-child th,
+.db__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.db__table tbody tr:hover th,
+.db__table tbody tr:hover td {
+  background: #f7f9fc;
+}
+
+.db__num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.db__state {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.8125rem;
+  background: #eceef2;
+  color: #3c4250;
+}
+
+.db__state--in {
+  background: #e4ecff;
+  color: #1f41b8;
+}
+
+.db__state--da {
+  background: #fdf0d9;
+  color: #8a5b00;
+}
+
+.db__state--chiuso {
+  background: #e4f2e9;
+  color: #16653c;
+}
+
+/* ---------- Scadenze ---------- */
+.db__deadlines li {
+  display: grid;
+  gap: 0.2rem 1.5rem;
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid var(--db-line);
+}
+
+@media (min-width: 620px) {
+  .db__deadlines li {
+    grid-template-columns: minmax(0, 1fr) 10rem 9rem;
+    align-items: baseline;
+  }
+}
+
+.db__deadlines li:last-child {
+  border-bottom: 0;
+}
+
+.db__deadline-when {
+  font-weight: 500;
+}
+
+.db__deadline-who {
+  font-size: 0.8125rem;
+  color: var(--db-soft);
+}
+
+/* ---------- Schermo stretto ---------- */
+@media (max-width: 860px) {
+  .db__shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .db__side {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+  }
+
+  .db__menu {
+    flex-direction: row;
+  }
+
+  .db__menu-item {
+    white-space: nowrap;
+  }
+
+  .db__menu-item--off {
+    display: none;
+  }
+
+  .db__user {
+    margin-top: 0;
+    padding: 0;
+    border-top: 0;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .db__user-role {
+    display: none;
+  }
+}

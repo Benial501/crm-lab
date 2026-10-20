@@ -1,0 +1,104 @@
+/* ---------- Canali di contatto ----------
+   Segno dentro un quadrato quieto, bordo sottilissimo: la stessa
+   logica di superficie del resto della pagina. */
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.channel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--on-dark);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.channel__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--on-dark);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+a.channel:hover .channel__glyph,
+a.channel:focus-visible .channel__glyph {
+  border-color: var(--accent);
+  color: var(--accent-bright);
+}
+
+/* In attesa del collegamento: stesso segno, più quieto. */
+.channel--pending {
+  cursor: default;
+}
+
+.channel--pending .channel__glyph {
+  color: var(--on-dark-soft);
+}
+
+/* ---------- Variante elenco ---------- */
+.channels--list {
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  border-top: 1px solid var(--hairline);
+}
+
+.channels--list li {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.channels--list .channel {
+  width: 100%;
+  padding-block: 0.4rem;
+}
+
+.channels--list .channel__glyph {
+  border: 0;
+  background: transparent;
+}
+
+.channel__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.channel__label {
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+
+.channel__value {
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Su fondo chiaro ---------- */
+.on-light .channel {
+  color: var(--on-light);
+}
+
+.on-light .channel__glyph {
+  border-color: var(--hairline-light);
+  background: #fff;
+  color: var(--on-light);
+}
+
+.on-light .channel__value {
+  color: var(--on-light-soft);
+}

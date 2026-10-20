@@ -1,0 +1,357 @@
+/* ---------------------------------------------------------------
+   Scheda di un concept.
+   Stesso registro della home: fondo scuro, linee sottilissime,
+   la schermata della demo come elemento dominante.
+   --------------------------------------------------------------- */
+.case {
+  padding-top: calc(var(--header-h) + clamp(2rem, 4vw, 3.5rem));
+  border-top: 0;
+}
+
+.case__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--on-dark-soft);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.case__crumbs a:hover,
+.case__crumbs a:focus-visible {
+  color: var(--accent-bright);
+}
+
+.case__head {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 1040px) {
+  /* La schermata della demo domina la prima vista: poco più di metà
+     larghezza, tutta l'altezza del blocco. */
+  .case__head {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .case__figure {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .case__say,
+  .case__meta {
+    grid-column: 1;
+  }
+}
+
+.case__title {
+  font-size: var(--step-head);
+  max-width: 20ch;
+}
+
+.case__intro {
+  margin-top: 1.2rem;
+  max-width: 52ch;
+}
+
+.case__actions {
+  margin-top: 1.8rem;
+}
+
+.case__meta {
+  display: grid;
+  align-content: start;
+  border-top: 1px solid var(--hairline);
+}
+
+.case__meta > div {
+  padding-block: 0.8rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.case__meta dt {
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+}
+
+.case__meta dd {
+  margin: 0.15rem 0 0;
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+
+/* ---------- Schermate ---------- */
+.case__figure,
+.case__screen {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.case__img {
+  width: 100%;
+  height: auto;
+}
+
+.case__figure .case__img {
+  flex: 1 1 auto;
+  min-height: 0;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.case__figure figcaption,
+.case__screen figcaption {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--hairline);
+  color: var(--on-dark-soft);
+}
+
+.case__screens {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: var(--band);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  /* Due schermate larghe e, stretta accanto, quella del telefono. */
+  .case__screens {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.55fr);
+    align-items: start;
+  }
+
+  /* Senza la schermata del telefono la colonna stretta non ha più
+     ragione d'essere: le larghe si dividono lo spazio in parti uguali. */
+  .case__screens--even {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Il video in apertura tiene la sua proporzione: non si allunga per
+   pareggiare la colonna di testo accanto. */
+.case__figure--video {
+  align-self: start;
+}
+
+.case__screen--phone .case__img {
+  max-height: 30rem;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ---------- Testo ---------- */
+.case__body {
+  display: grid;
+  gap: 2rem clamp(1.5rem, 3vw, 3.5rem);
+  margin-top: var(--band);
+  padding-top: clamp(2rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--hairline);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .case__body {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.case__h2 {
+  font-size: var(--step-body);
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+}
+
+.case__block p {
+  font-size: var(--step-body);
+  line-height: 1.75;
+  color: var(--on-dark-soft);
+}
+
+.case__columns {
+  display: grid;
+  gap: 2rem clamp(1.5rem, 3vw, 3.5rem);
+  margin-top: var(--band);
+  padding-top: clamp(2rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--hairline);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 820px) {
+  .case__columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.case__list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.case__list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: start;
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+}
+
+.case__list svg {
+  margin-top: 0.35em;
+  color: var(--accent-bright);
+}
+
+/* L'elenco di quello che manca non porta il segno di spunta: non sono
+   funzioni consegnate, e il segno non deve dire il contrario. */
+.case__list--open svg {
+  color: var(--on-dark-soft);
+}
+
+/* L'etichetta sotto il titolo: dice la natura del lavoro prima del testo. */
+.case__label {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.35em 0.6em;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  font-size: var(--step-small);
+  line-height: 1;
+  color: var(--accent-bright);
+}
+
+/* ---------- Chiusura ---------- */
+.case__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: var(--band);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.case__cta-text {
+  max-width: 26ch;
+  font-weight: 500;
+  color: var(--on-dark);
+}
+
+.case__next {
+  margin-top: var(--band);
+}
+
+.case__next ul {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 760px) {
+  .case__next ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.case__next a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.case__next a:hover,
+.case__next a:focus-visible {
+  border-color: var(--hairline-strong);
+}
+
+.case__next-img {
+  grid-column: 1 / -1;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.case__next-text {
+  display: grid;
+  gap: 0.15rem;
+  padding: 1.1rem;
+  padding-right: 0;
+}
+
+.case__next-title {
+  font-size: var(--step-body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.case__next-kind {
+  color: var(--on-dark-soft);
+}
+
+.case__next svg {
+  align-self: center;
+  margin-right: 1.1rem;
+  color: var(--accent-bright);
+}
+
+/* ---------- Ingresso ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .case__crumbs,
+  .case__say,
+  .case__meta {
+    animation: case-rise 700ms var(--ease-out) backwards;
+  }
+
+  .case__say {
+    animation-delay: 70ms;
+  }
+
+  .case__meta {
+    animation-delay: 140ms;
+  }
+
+  .case__figure {
+    animation: case-shutter 1000ms var(--ease-out) 120ms backwards;
+  }
+
+  .case__figure .case__img {
+    animation: case-settle 1200ms var(--ease-out) 120ms backwards;
+  }
+
+  @keyframes case-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+
+  @keyframes case-shutter {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes case-settle {
+    from {
+      transform: scale(1.08);
+    }
+  }
+}

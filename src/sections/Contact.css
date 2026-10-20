@@ -1,0 +1,259 @@
+/* ---------------------------------------------------------------
+   Contatti — a sinistra cosa aspettarsi e dove scrivere, a destra
+   il modulo. I campi sono campi: hanno le loro linee.
+   --------------------------------------------------------------- */
+.contact__grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 980px) {
+  .contact__grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+}
+
+.contact__title {
+  font-size: var(--step-head);
+  max-width: 12ch;
+}
+
+.contact__lede {
+  margin-top: 1.2rem;
+  max-width: 44ch;
+}
+
+.contact__points {
+  display: grid;
+  margin-top: 2rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.contact__points li {
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.contact__point-title {
+  display: block;
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+
+.contact__point-body {
+  display: block;
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+}
+
+.contact__direct {
+  margin-top: 2rem;
+}
+
+.contact__direct-title {
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+  margin-bottom: 0.8rem;
+}
+
+.contact__phone {
+  display: inline-flex;
+  margin-top: 1rem;
+}
+
+/* ---------- Modulo ---------- */
+.form {
+  display: grid;
+  gap: 1.15rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+.form__fields {
+  display: grid;
+  gap: 1.15rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form__fields:disabled input,
+.form__fields:disabled select,
+.form__fields:disabled textarea {
+  cursor: not-allowed;
+}
+
+.form__notice {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(82, 103, 255, 0.4);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--on-dark);
+  font-size: var(--step-small);
+  line-height: 1.6;
+}
+
+.form__notice-dev {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--on-dark-soft);
+}
+
+.form__row {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.form__pair {
+  display: grid;
+  gap: 1.15rem;
+}
+
+@media (min-width: 560px) {
+  .form__pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.form label {
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+
+.form__optional {
+  font-weight: 400;
+  color: var(--on-dark-soft);
+}
+
+.form input[type='text'],
+.form input[type='email'],
+.form select,
+.form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  background: var(--ground);
+  color: var(--on-dark);
+  font-size: var(--step-body);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.form textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form input:hover,
+.form select:hover,
+.form textarea:hover {
+  border-color: var(--on-dark-soft);
+}
+
+.form input:focus-visible,
+.form select:focus-visible,
+.form textarea:focus-visible {
+  border-color: var(--accent-bright);
+}
+
+.form ::placeholder {
+  color: var(--on-dark-soft);
+}
+
+.form [aria-invalid='true'] {
+  border-color: #ff8a7a;
+}
+
+.form__error {
+  font-size: var(--step-small);
+  color: #ff8a7a;
+}
+
+.form__row--check {
+  margin-top: 0.3rem;
+}
+
+.form__check {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  font-weight: 400;
+  font-size: var(--step-small);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.form__check input {
+  width: 20px;
+  height: 20px;
+  margin-top: 0.15rem;
+  accent-color: var(--accent);
+}
+
+.form__check-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--on-dark-soft);
+}
+
+.form__honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.form__submit {
+  justify-self: start;
+  margin-top: 0.3rem;
+}
+
+.form__submit[disabled] {
+  background: var(--surface-2);
+  color: var(--on-dark-soft);
+  border-color: var(--hairline-strong);
+  cursor: progress;
+}
+
+.form__feedback {
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: var(--step-small);
+}
+
+.form__feedback--ok {
+  background: rgba(22, 101, 60, 0.22);
+  border: 1px solid rgba(60, 190, 125, 0.45);
+}
+
+.form__feedback--ko {
+  background: rgba(122, 42, 30, 0.22);
+  border: 1px solid rgba(255, 138, 122, 0.45);
+}
+
+@media (max-width: 519px) {
+  .form__submit {
+    justify-self: stretch;
+  }
+}
+
+/* Uso dei dati: una riga di testo sotto i campi, non una casella.
+   Il rimando all'informativa compare solo quando la pagina esiste. */
+.form__use {
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+  max-width: 60ch;
+}
+
+.form__use-note {
+  color: var(--on-dark-soft);
+}

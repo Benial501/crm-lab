@@ -1,0 +1,172 @@
+/* ---------------------------------------------------------------
+   Progetti — una schermata reale per concept, grande abbastanza da
+   leggersi, e sotto il minimo che serve per decidere se aprirla.
+   --------------------------------------------------------------- */
+.projects__list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.work {
+  padding-block: clamp(2.25rem, 4vw, 3.5rem);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* ---------- La schermata principale ---------- */
+.work__main {
+  margin: 0 0 1.75rem;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+
+.work__main-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.work:hover .work__main {
+  border-color: var(--hairline-strong);
+}
+
+/* ---------- Il testo sotto ---------- */
+.work__body {
+  display: grid;
+  gap: 1.5rem clamp(1.5rem, 3vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .work__body {
+    grid-template-columns: minmax(0, 1fr) 200px;
+  }
+}
+
+.work__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+.work__category {
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+}
+
+.work__badge {
+  font-size: var(--step-small);
+  line-height: 1;
+  padding: 0.35em 0.6em;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  color: var(--accent-bright);
+}
+
+.work__title {
+  font-size: var(--step-head);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.work__kind {
+  margin-top: 0.2rem;
+  color: var(--on-dark-soft);
+}
+
+.work__blurb {
+  margin-top: 0.9rem;
+  max-width: 52ch;
+  font-size: var(--step-body);
+  line-height: 1.7;
+}
+
+.work__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Il dettaglio su telefono ---------- */
+.work__phone {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+}
+
+.work__phone-img {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  aspect-ratio: 9 / 19;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.work__phone figcaption {
+  color: var(--on-dark-soft);
+}
+
+/* Sotto gli 860px il dettaglio su telefono non aggiunge niente:
+   la pagina è già larga quanto un telefono. */
+@media (max-width: 859px) {
+  .work__phone {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Telefono: i tre concept diventano tre schede affiancate da scorrere.
+   --------------------------------------------------------------- */
+@media (max-width: 859px) {
+  .projects__list.rail > .work {
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--pad);
+  }
+
+  .rail .work__main {
+    margin-bottom: 1.25rem;
+  }
+
+  .rail .work__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+
+  .rail .work__say {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .rail .work__actions {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.9rem;
+  }
+
+  .rail .work__open {
+    width: 100%;
+  }
+}

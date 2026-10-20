@@ -1,0 +1,132 @@
+/* ---------------------------------------------------------------
+   Il riquadro del video di presentazione.
+   Stessa superficie delle schermate: un gradino di tono, una linea
+   sottilissima, lo stesso raggio. L'unica cosa che si aggiunge è il
+   segno del Play — e quello deve vedersi da lontano.
+   --------------------------------------------------------------- */
+.vfig {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* La proporzione è dichiarata qui una volta sola: dentro, copertina e
+   video riempiono il riquadro senza deformarsi mai. */
+.vfig__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.vfig__video,
+.vfig__poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- La copertina ---------- */
+.vfig__cover {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Una velatura appena percettibile: tiene il contrasto del Play e del
+   testo senza spegnere la schermata che sta sotto. */
+.vfig__cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.1) 45%);
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.vfig__play {
+  position: absolute;
+  z-index: 1;
+  top: auto;
+  left: auto;
+  right: clamp(0.9rem, 2.5vw, 1.4rem);
+  bottom: clamp(0.9rem, 2.5vw, 1.4rem);
+  transform: none;
+  display: grid;
+  place-items: center;
+  width: clamp(3.5rem, 7vw, 4.75rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(12, 12, 14, 0.55);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+/* Il triangolo è otticamente a sinistra del centro: lo si riporta a posto. */
+.vfig__play svg {
+  margin-left: 0.18em;
+}
+
+.vfig__label {
+  position: absolute;
+  z-index: 1;
+  left: clamp(0.9rem, 2.5vw, 1.4rem);
+  bottom: clamp(0.9rem, 2.5vw, 1.4rem);
+  right: calc(clamp(0.9rem, 2.5vw, 1.4rem) + clamp(3.5rem, 7vw, 4.75rem) + 0.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.7rem;
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: #fff;
+}
+
+.vfig__time {
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.vfig__cover:hover .vfig__play,
+.vfig__cover:focus-visible .vfig__play {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.vfig__cover:hover::after {
+  opacity: 0.75;
+}
+
+.vfig__cover:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: -3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vfig__cover:hover .vfig__play {
+    transform: scale(1.06);
+  }
+}
+
+/* ---------- Didascalia ---------- */
+.vfig figcaption {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--hairline);
+  color: var(--on-dark-soft);
+}

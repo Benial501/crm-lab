@@ -1,0 +1,69 @@
+/* ---------------------------------------------------------------
+   Domande frequenti — le domande restano visibili, le risposte si
+   aprono quando servono. Il riepilogo usa il controllo nativo details.
+   --------------------------------------------------------------- */
+.faq__list {
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 1px solid var(--hairline);
+}
+
+@media (min-width: 900px) {
+  .faq__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(2rem, 5vw, 4.5rem);
+  }
+}
+
+.faq__item {
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+  font-size: var(--step-body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  max-width: 34ch;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq__q {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.faq__q span {
+  flex: 1;
+}
+
+.faq__mark {
+  flex: none;
+  color: var(--accent-bright);
+  transform: rotate(90deg);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.faq__q[aria-expanded='true'] .faq__mark {
+  transform: rotate(-90deg);
+}
+
+.faq__panel {
+  padding: 0.6rem 2rem 0.25rem 0;
+}
+
+.faq__a {
+  color: var(--on-dark-soft);
+  max-width: 54ch;
+}

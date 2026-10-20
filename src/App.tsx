@@ -1,0 +1,73 @@
+import { useEffect } from 'react'
+import { Outlet, Route, Routes, useLocation } from 'react-router-dom'
+import { Header } from './components/Header'
+import { Footer } from './components/Footer'
+import { Home } from './pages/Home'
+import { ProjectDetail } from './pages/ProjectDetail'
+import { Privacy } from './pages/Privacy'
+import { NotFound } from './pages/NotFound'
+import { LegalDemo } from './demos/LegalDemo'
+import { ShopDemo } from './demos/ShopDemo'
+import { DashboardDemo } from './demos/DashboardDemo'
+import './demos/demos.css'
+
+/** Al cambio pagina si riparte dall'alto, salvo quando si punta a una sezione. */
+function ScrollToTop() {
+  const { pathname, state } = useLocation()
+
+  useEffect(() => {
+    if ((state as { scrollTo?: string } | null)?.scrollTo) return
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [pathname, state])
+
+  return null
+}
+
+/** Il sito vero e proprio: intestazione, contenuto, piè di pagina. */
+function SiteLayout() {
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Vai al contenuto
+      </a>
+      <Header />
+      <main id="main">
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  )
+}
+
+/**
+ * Le demo girano senza il telaio del sito: devono poter essere guardate
+ * come prodotti a sé, altrimenti non dimostrano niente.
+ */
+function DemoLayout() {
+  return (
+    <main id="main">
+      <Outlet />
+    </main>
+  )
+}
+
+export default function App() {
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<SiteLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/progetti/:slug" element={<ProjectDetail />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+        <Route element={<DemoLayout />}>
+          <Route path="/demo/studio-legale" element={<LegalDemo />} />
+          <Route path="/demo/orso-nero" element={<ShopDemo />} />
+          <Route path="/demo/bottega" element={<DashboardDemo />} />
+        </Route>
+      </Routes>
+    </>
+  )
+}

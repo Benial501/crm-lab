@@ -1,0 +1,66 @@
+/* ---------------------------------------------------------------
+   CRM LAB — token di design
+   Unico punto in cui vivono colori, tipografia, spaziature e ritmo.
+
+   Registro: studio scuro. Fondo profondo, superfici che si staccano di
+   un soffio, linee quietissime a tenere la griglia, e il blu di marca
+   usato come accento e bagliore — mai come campitura di mezza pagina.
+   --------------------------------------------------------------- */
+:root {
+  /* ---------- Colore ---------- */
+  --ground: #0b0c0f;        /* nero carbone, il fondo di quasi tutto */
+  --surface: #121419;       /* tessera: un soffio sopra il fondo */
+  --surface-2: #181b22;     /* tessera sollevata, o stato attivo */
+  --paper: #f5f5f2;         /* bianco caldo, per l'unica sezione chiara */
+  --grey: #777b84;          /* grigio intermedio di marca: grafica, non testo */
+
+  /* Linee. Sono il telaio di questa versione: sottilissime, mai nere su
+     nero, mai usate per incorniciare qualcosa che basta a sé stesso. */
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.16);
+  --hairline-light: rgba(11, 12, 15, 0.12);
+
+  /* Accento: il blu elettrico di marca, pieno. Non ci va testo sopra —
+     l'azione primaria è bianca — quindi non serve scurirlo. */
+  --accent: #5267ff;
+  --accent-soft: rgba(82, 103, 255, 0.14);
+  --accent-bright: #8e9bff; /* testo d'accento su fondo scuro: 7,4:1 */
+  --accent-deep: #2f43d8;   /* testo d'accento su fondo chiaro: 6,5:1 */
+
+  /* Testo */
+  --on-dark: #f2f3f5;
+  --on-dark-soft: #9aa1ad;  /* 7,4:1 sul fondo */
+  --on-light: #0b0c0f;
+  --on-light-soft: #585c64;
+
+  /* ---------- Tipografia ----------
+     Un solo carattere. Cinque gradini, non uno di più. */
+  --font-sans: "Albert Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --step-small: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);  /* 14 → 15 */
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);      /* 17 → 18 */
+  --step-lead: clamp(1.1875rem, 1.1rem + 0.45vw, 1.5rem);      /* 19 → 24 */
+  --step-head: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);           /* 28 → 48 */
+  --step-display: clamp(2.25rem, 1.5rem + 2.8vw, 3.75rem);     /* 36 → 60 */
+
+  /* ---------- Griglia ---------- */
+  --gutter: clamp(1.25rem, 0.8rem + 2.4vw, 3.5rem);  /* margini esterni, uguali */
+  --pad: clamp(1.25rem, 1.4vw, 1.75rem);             /* respiro dentro la tessera */
+  --radius: 4px;                                     /* un solo raggio su tutto */
+  --band: clamp(4.5rem, 3rem + 5vw, 8rem);           /* aria fra due bande */
+  --max-width: 1360px;
+  --header-h: 72px;
+
+  /* ---------- Movimento ---------- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 300ms;
+  --dur-slow: 700ms;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --header-h: 60px;
+  }
+}

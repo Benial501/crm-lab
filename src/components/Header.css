@@ -1,0 +1,191 @@
+/* ---------------------------------------------------------------
+   Intestazione.
+   Barra piena a filo, una linea sottilissima a chiuderla. Marchio,
+   voci, una sola azione in campitura chiara.
+   --------------------------------------------------------------- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+/* Appena si scorre la barra prende un fondo: prima galleggia sulla
+   fotografia, com'è giusto che sia. */
+.header--solid {
+  background: rgba(11, 12, 15, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--hairline);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  height: 100%;
+}
+
+/* ---------- Marchio ---------- */
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.42rem;
+  white-space: nowrap;
+}
+
+.logo__mark {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.logo__sub {
+  font-size: calc(var(--logo-size, 3.25rem) * 0.25);
+}
+
+.logo__sub {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  color: var(--on-dark-soft);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.header__logo:hover .logo__sub,
+.header__logo:focus-visible .logo__sub,
+.footer__logo:hover .logo__sub {
+  color: var(--accent-bright);
+}
+
+.header__logo {
+  flex: none;
+}
+
+/* ---------- Voci ---------- */
+.header__nav {
+  margin-left: auto;
+}
+
+.header__nav ul {
+  display: flex;
+  gap: clamp(0.9rem, 2vw, 1.9rem);
+}
+
+.header__nav a {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0;
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.header__nav a:hover,
+.header__nav a:focus-visible {
+  color: var(--on-dark);
+}
+
+.header__nav a[aria-current] {
+  color: var(--on-dark);
+}
+
+.header__nav a[aria-current]::after {
+  transform: scaleX(1);
+}
+
+.header__cta {
+  flex: none;
+  min-height: 40px;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+}
+
+/* ---------- Telefono ---------- */
+.header__toggle {
+  display: none;
+  flex: none;
+  margin-left: auto;
+  padding: 0.5rem;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--on-dark);
+  cursor: pointer;
+}
+
+@media (max-width: 1079px) {
+  .header .header__nav,
+  .header .header__cta {
+    display: none;
+  }
+
+  .header .header__toggle {
+    display: block;
+  }
+}
+
+.menu {
+  position: fixed;
+  inset: var(--header-h) 0 0;
+  z-index: 99;
+  background: var(--ground);
+  overflow-y: auto;
+}
+
+.menu__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  min-height: 100%;
+  padding-block: 2.5rem;
+}
+
+.menu__list a {
+  display: block;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: var(--step-lead);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.menu__list li:first-child a {
+  border-top: 1px solid var(--hairline);
+}
+
+.menu__list a:hover,
+.menu__list a:focus-visible {
+  color: var(--accent-bright);
+}
+
+.menu__foot {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.menu__cta {
+  width: 100%;
+}

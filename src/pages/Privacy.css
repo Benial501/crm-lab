@@ -1,0 +1,81 @@
+/* ---------------------------------------------------------------
+   Pagine di testo lungo (informativa privacy).
+   Una colonna sola, misura di lettura stretta: qui non c'è niente da
+   guardare, solo da leggere.
+   --------------------------------------------------------------- */
+.legal__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--on-dark-soft);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.legal__crumbs a:hover,
+.legal__crumbs a:focus-visible {
+  color: var(--accent-bright);
+}
+
+.legal__title {
+  font-size: var(--step-head);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  max-width: 20ch;
+}
+
+.legal__lede {
+  margin-top: 1rem;
+  max-width: 58ch;
+  color: var(--on-dark-soft);
+}
+
+.legal__notice {
+  max-width: 68ch;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  padding: clamp(1rem, 2vw, 1.25rem);
+  border: 1px solid var(--hairline-strong);
+  border-left-width: 2px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--step-body);
+  line-height: 1.7;
+}
+
+.legal__block {
+  max-width: 68ch;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.25rem, 2vw, 1.75rem);
+  border-top: 1px solid var(--hairline);
+}
+
+.legal__block h2 {
+  font-size: var(--step-lead);
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+}
+
+.legal__block p {
+  font-size: var(--step-body);
+  line-height: 1.75;
+  color: var(--on-dark-soft);
+}
+
+.legal__block p + p {
+  margin-top: 0.9rem;
+}
+
+.legal__block strong {
+  color: var(--on-dark);
+  font-weight: 500;
+}
+
+.legal__data {
+  display: grid;
+  gap: 0.35rem;
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+}
+
+.legal__back {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}

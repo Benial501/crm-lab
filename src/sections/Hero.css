@@ -1,0 +1,187 @@
+/* ---------------------------------------------------------------
+   Prima schermata.
+   Testo a sinistra, scena di interfacce e dispositivi a destra, e sotto le
+   quattro aree separate da linee sottilissime. Un bagliore blu dietro
+   tutto, come nella fotografia: è l'unico punto in cui il colore
+   occupa spazio, e non è una campitura ma una luce.
+   --------------------------------------------------------------- */
+.hero {
+  position: relative;
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 5vw, 5rem));
+  padding-bottom: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__glow {
+  position: absolute;
+  z-index: -1;
+  top: -10%;
+  right: -10%;
+  width: min(90vw, 1100px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(82, 103, 255, 0.22) 0%, rgba(82, 103, 255, 0) 62%);
+  pointer-events: none;
+}
+
+.hero__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+@media (min-width: 1000px) {
+  .hero__top {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+}
+
+/* ---------- Il testo ---------- */
+.hero__title {
+  max-width: 15ch;
+}
+
+.hero__lede {
+  margin-top: 1.5rem;
+  max-width: 42ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+@media (max-width: 479px) {
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---------- Progetto in primo piano ---------- */
+.hero__media {
+  position: relative;
+}
+
+@media (min-width: 1440px) {
+  .hero__media {
+    margin-right: calc((100vw - var(--max-width)) / -2 - var(--gutter));
+  }
+}
+
+/* ---------- Le quattro aree ----------
+   Una riga sola, divisa da linee sottilissime: è la stessa griglia
+   della fotografia, e dice in quattro parole cosa realizziamo. */
+.hero__areas {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--hairline);
+}
+
+@media (min-width: 620px) {
+  .hero__areas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .hero__areas {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.hero__areas li + li {
+  border-top: 1px solid var(--hairline);
+}
+
+@media (min-width: 620px) {
+  .hero__areas li:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .hero__areas li:nth-child(even) {
+    border-left: 1px solid var(--hairline);
+  }
+}
+
+@media (min-width: 1000px) {
+  .hero__areas li {
+    border-top: 0;
+  }
+
+  .hero__areas li + li {
+    border-left: 1px solid var(--hairline);
+  }
+}
+
+.area {
+  display: grid;
+  gap: 0.75rem;
+  height: 100%;
+  padding: clamp(1.4rem, 2.2vw, 2rem) clamp(1.25rem, 2vw, 1.75rem);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.area:hover,
+.area:focus-visible {
+  background: var(--surface);
+}
+
+.area__glyph {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.area:hover .area__glyph,
+.area:focus-visible .area__glyph {
+  transform: translateY(-2px);
+}
+
+.area__title {
+  font-size: var(--step-body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.area__body {
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+  max-width: 28ch;
+}
+
+/* ---------- Ingresso ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__say,
+  .hero__media,
+  .hero__areas {
+    animation: hero-rise 820ms var(--ease-out) backwards;
+  }
+
+  .hero__media {
+    animation-delay: 110ms;
+  }
+
+  .hero__areas {
+    animation-delay: 220ms;
+  }
+
+  .hero__glow {
+    animation: hero-glow 1600ms var(--ease-out) backwards;
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  @keyframes hero-glow {
+    from {
+      opacity: 0;
+    }
+  }
+}

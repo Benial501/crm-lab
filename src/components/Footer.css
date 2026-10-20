@@ -1,0 +1,123 @@
+/* ---------------------------------------------------------------
+   Piè di pagina — tre gruppi divisi dallo spazio e una riga di chiusura.
+   Su telefono i gruppi si impilano, ognuno col suo titolo.
+   --------------------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--hairline);
+  padding-top: var(--band);
+  padding-bottom: 2rem;
+}
+
+.footer__inner {
+  display: grid;
+  gap: 2.5rem clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 720px) {
+  .footer__inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Il marchio dello studio — il file originale, non testo trattato —
+   al posto della vecchia scritta a tutta larghezza: riconoscibile,
+   in una misura che non invade il piè di pagina. */
+.footer__logo {
+  display: inline-block;
+}
+
+.footer__logo-img {
+  display: block;
+  width: clamp(8.5rem, 15vw, 11rem);
+  height: auto;
+}
+
+.footer__desc {
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+  max-width: 32ch;
+}
+
+.footer__heading {
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--on-dark-soft);
+  margin-bottom: 1rem;
+}
+
+.footer__list {
+  display: grid;
+  gap: 0.2rem;
+  font-size: var(--step-body);
+}
+
+/* Bersagli comodi da toccare: la riga è alta, non solo il testo. */
+.footer__list a,
+.footer__plain {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.1rem 0;
+}
+
+.footer__plain {
+  color: var(--on-dark-soft);
+}
+
+.footer__list a:hover,
+.footer__list a:focus-visible,
+.footer__link:hover,
+.footer__link:focus-visible {
+  color: var(--accent-bright);
+}
+
+.footer__channels {
+  margin-top: 0.8rem;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 2rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hairline);
+  font-size: var(--step-small);
+  color: var(--on-dark-soft);
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+}
+
+.footer__legal a,
+.footer__prefs {
+  min-height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--hairline-strong);
+}
+
+.footer__legal a:hover,
+.footer__legal a:focus-visible,
+.footer__prefs:hover,
+.footer__prefs:focus-visible {
+  color: var(--on-dark);
+}

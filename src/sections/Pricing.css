@@ -1,0 +1,278 @@
+/* ---------------------------------------------------------------
+   Prezzi — l'unica sezione chiara del sito.
+   Un listino si legge meglio su carta: fondo bianco caldo, righe
+   divise da una linea, la cifra a destra. Nessuna scheda, nessun
+   secondo tono di fondo.
+   --------------------------------------------------------------- */
+.family {
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+/* Un tono meno netto rispetto al bianco pieno mantiene la pausa
+   commerciale senza far sembrare il listino una pagina separata. */
+.pricing {
+  background: #ebebe7;
+  box-shadow: inset 0 1px rgba(82, 103, 255, 0.22);
+}
+
+.family:first-of-type {
+  margin-top: 0;
+}
+
+.family__head {
+  display: grid;
+  gap: 0.4rem clamp(1.5rem, 4vw, 4rem);
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 860px) {
+  .family__head {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: baseline;
+  }
+}
+
+.family__title {
+  font-size: var(--step-lead);
+  font-weight: 500;
+}
+
+.family__body {
+  max-width: 60ch;
+  font-size: var(--step-body);
+  color: var(--on-light-soft);
+}
+
+.family__grid {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hairline-light);
+}
+
+.plan {
+  display: grid;
+  gap: 0.6rem clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: clamp(1.5rem, 2.5vw, 2rem);
+  border-bottom: 1px solid var(--hairline-light);
+}
+
+@media (min-width: 900px) {
+  .plan {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+    /* Le prime due righe prendono l'altezza del loro contenuto: così il
+       testo sotto il nome non scivola in fondo alla scheda quando la
+       colonna di destra è lunga. */
+    grid-template-rows: auto auto 1fr;
+    align-items: start;
+  }
+
+  .plan__title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .plan__desc {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .plan__sets {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+  }
+
+  .plan__price {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    text-align: right;
+  }
+
+  .plan__action {
+    grid-column: 3;
+    grid-row: 3;
+    justify-self: end;
+  }
+}
+
+.plan__title {
+  font-size: var(--step-lead);
+  font-weight: 500;
+}
+
+.plan__desc {
+  font-size: var(--step-body);
+  color: var(--on-light-soft);
+  max-width: 44ch;
+}
+
+.plan__includes {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.plan__includes li {
+  position: relative;
+  padding-left: 1.05rem;
+  font-size: var(--step-body);
+  color: var(--on-light-soft);
+}
+
+.plan__includes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--accent-deep);
+}
+
+.plan__price-value {
+  display: block;
+  font-size: var(--step-head);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* «Su preventivo» non è una cifra: non prende la misura delle cifre,
+   che a quella scala andrebbe a capo. */
+.plan__price-value--quote {
+  font-size: var(--step-lead);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.plan__price-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--step-small);
+  color: var(--on-light-soft);
+}
+
+.plan__action {
+  justify-self: start;
+  margin-top: 0.7rem;
+}
+
+/* ---------- Compreso / non compreso ---------- */
+.plan__sets {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+}
+
+.plan__set-title {
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--on-light-soft);
+  margin-bottom: 0.4rem;
+}
+
+/* Il segno davanti alla voce dice da solo se è dentro o fuori:
+   pieno per quello che è compreso, vuoto per quello che non lo è. */
+.plan__set--out .plan__includes li::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--on-light-soft);
+}
+
+/* ---------- La nota comune ---------- */
+.pricing__note--lead {
+  max-width: 78ch;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1rem, 2vw, 1.25rem) clamp(1rem, 2vw, 1.5rem);
+  border-left: 2px solid var(--accent-deep);
+  background: rgba(0, 0, 0, 0.03);
+  font-size: var(--step-body);
+  line-height: 1.7;
+  color: var(--on-light-soft);
+}
+
+@media (max-width: 519px) {
+  .plan__action {
+    justify-self: stretch;
+  }
+}
+
+/* Su una colonna sola la cifra segue subito il nome del piano: sopra
+   l'importo non deve finire l'ultima voce di un elenco. */
+@media (max-width: 899px) {
+  .plan__title {
+    order: 1;
+  }
+
+  .plan__price {
+    order: 2;
+    margin-bottom: 0.4rem;
+  }
+
+  .plan__desc {
+    order: 3;
+  }
+
+  .plan__sets {
+    order: 4;
+  }
+
+  .plan__action {
+    order: 5;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Telefono: il listino diventa una fila da scorrere.
+   Ogni pacchetto è una scheda intera — nome, cifra, cosa comprende,
+   il bottone — invece di una riga in una colonna che non finisce mai.
+   --------------------------------------------------------------- */
+@media (max-width: 859px) {
+  .family {
+    margin-top: clamp(2.25rem, 7vw, 3rem);
+  }
+
+  .family__head {
+    padding-bottom: 0.9rem;
+  }
+
+  .family__grid.rail > .plan {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-block: var(--pad);
+  }
+
+  /* Nella scheda la cifra viene per prima: è la risposta alla domanda
+     con cui si arriva qui. */
+  .rail .plan__price {
+    order: 1;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--hairline-light);
+  }
+
+  .rail .plan__title {
+    order: 2;
+    margin-bottom: 0.4rem;
+  }
+
+  .rail .plan__desc {
+    order: 3;
+  }
+
+  .rail .plan__sets {
+    order: 4;
+    margin-top: 0.9rem;
+  }
+
+  /* Il bottone resta in fondo alla scheda anche quando il testo sopra
+     è più corto che nelle altre: la fila non balla. */
+  .rail .plan__action {
+    order: 5;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 1.2rem;
+  }
+}
