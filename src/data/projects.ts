@@ -157,6 +157,96 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'ordini-asporto',
+    title: 'Sito di ordini da asporto per ristoranti',
+    category: 'Applicazione web',
+    kind: 'concept',
+    action: {
+      href: 'https://prenotazioni-ristorante-demo.vercel.app/',
+      label: 'Apri la demo',
+      external: true,
+    },
+    brand: 'Asporto',
+    blurb:
+      'Il locale riceve gli ordini da asporto dal proprio sito, già scritti e con l’orario di ritiro scelto dal cliente, senza commissioni su ogni ordine.',
+    audience:
+      'Pizzerie, trattorie e ristoranti che lavorano anche d’asporto e oggi prendono gli ordini al telefono o su una piattaforma di consegna.',
+    need:
+      'Il telefono squilla durante il servizio: l’ordine finisce su un foglietto, il nome si capisce a metà, il cliente arriva prima che sia pronto. Le piattaforme risolvono la raccolta, ma trattengono una percentuale su ogni ordine e tengono per sé i dati di chi ordina.',
+    solution:
+      'Un sito d’ordine che appartiene al locale. Il cliente sceglie i piatti, li personalizza e indica il giorno e l’ora di ritiro fra le fasce ancora libere; in cucina l’ordine arriva già scritto, con personalizzazioni, note e totale, e diventa una comanda da stampare. Menu, orari, capienza per fascia e identità del locale si cambiano dall’area ristoratore, senza passare dallo studio.',
+    canTry: [
+      'Sfogliare il menu per categorie, con ricerca per piatto o per ingrediente',
+      'Personalizzare un piatto — formato, ingredienti da togliere, extra a pagamento — con il prezzo che si aggiorna a ogni scelta',
+      'Un carrello che riporta per intero le personalizzazioni e le note, e resta anche ricaricando la pagina',
+      'Scegliere giorno e orario di ritiro fra le fasce che il locale ha davvero libere',
+      'Completare l’ordine come ospite o con un profilo, con pagamento al ritiro e numero d’ordine in chiusura',
+      'Entrare nell’area ristoratore con le credenziali di prova pubblicate in home',
+      'La schermata degli ordini da preparare, che si aggiorna da sola ogni dieci secondi, con avviso sonoro facoltativo',
+      'La comanda già formattata per la stampante termica da 80 mm della cucina',
+      'Cambiare il menu dall’area ristoratore: categorie, piatti, disponibilità, varianti ed extra',
+      'Impostare orari di apertura, fasce di ritiro, quanti ordini accettare per fascia e i minuti di preparazione',
+    ],
+    toUse: [
+      'Il locale della demo è di fantasia: nome, logo, colori, menu, prezzi, orari e recapiti vanno sostituiti con quelli veri',
+      'Le credenziali dell’area ristoratore sono pubbliche perché è una demo: in un locale vero diventano un accesso riservato',
+      'Si ordina per il ritiro e si paga in cassa: non c’è pagamento online né consegna a domicilio',
+      'Serve un indirizzo intestato al locale e il materiale da pubblicare: piatti, descrizioni, fotografie',
+      'Il prodotto è in versione beta: va concordato cosa aggiungere prima di aprirlo ai clienti',
+    ],
+    video: {
+      src: '/video/asporto-presentazione.mp4',
+      poster: '/img/asporto-cover-logo',
+      posterWidths: [640, 960, 1280],
+      posterAlt: 'Titolo «Ordini da asporto» e marchio CRM LAB, bianchi su fondo scuro.',
+      duration: '4:58',
+    },
+    shots: [
+      {
+        base: '/img/asporto-cliente',
+        widths: [800, 1200, 1600],
+        alt: 'La prima schermata del sito del locale: invito a ordinare da asporto e le categorie del menu.',
+        ratio: '16/10',
+      },
+      {
+        base: '/img/asporto-prodotto',
+        widths: [800, 1200, 1600],
+        alt: 'La scheda di una pizza: formato, ingredienti da togliere ed extra a pagamento, col prezzo aggiornato.',
+        ratio: '16/10',
+      },
+      {
+        base: '/img/asporto-checkout',
+        widths: [800, 1200, 1600],
+        alt: 'La chiusura dell’ordine: le fasce di ritiro disponibili, i dati del cliente e il riepilogo col totale.',
+        ratio: '16/10',
+      },
+      {
+        base: '/img/asporto-ordini',
+        widths: [800, 1200, 1600],
+        alt: 'L’area ristoratore: gli ordini da preparare, con orario di ritiro, cliente, piatti, note e totale.',
+        ratio: '16/10',
+      },
+      {
+        base: '/img/asporto-comanda',
+        widths: [800, 1200, 1600],
+        alt: 'La comanda di un ordine, formattata per la stampante termica della cucina.',
+        ratio: '16/10',
+      },
+      {
+        base: '/img/asporto-menu',
+        widths: [800, 1200, 1600],
+        alt: 'La gestione del menu: categorie e piatti con prezzo, disponibilità e riordino.',
+        ratio: '16/10',
+      },
+      {
+        base: '/img/asporto-orari',
+        widths: [800, 1200, 1600],
+        alt: 'Orari e ritiri: giorni di apertura con doppia fascia, minuti di preparazione e ordini accettati per fascia.',
+        ratio: '16/10',
+      },
+    ],
+  },
+  {
     slug: 'studio-professionale',
     title: 'Sito per uno studio professionale',
     category: 'Sito aziendale',
