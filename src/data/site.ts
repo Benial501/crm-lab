@@ -66,7 +66,7 @@ export function channelDisplay(channel: Channel): string {
  */
 export const channels: Channel[] = [
   { id: 'whatsapp', label: 'WhatsApp', value: 'https://api.whatsapp.com/message/JNHZKUNROQD2J1?autoload=1&app_absent=0' },
-  { id: 'email', label: 'Email', value: '' },
+  { id: 'email', label: 'Email', value: 'support@crm-lab.it' },
   { id: 'instagram', label: 'Instagram', value: 'crm._.lab' },
   { id: 'tiktok', label: 'TikTok', value: 'crmlab3' },
 ]
