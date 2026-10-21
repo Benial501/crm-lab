@@ -86,10 +86,10 @@ export const site = {
 
   /**
    * Endpoint a cui inviare il modulo contatti (POST JSON).
-   * Si imposta con la variabile d'ambiente VITE_CONTACT_ENDPOINT.
-   * Finché è vuoto il modulo non finge l'invio: avvisa che manca la configurazione.
+   * Di base è la funzione del sito `api/contact.ts`, che inoltra la richiesta
+   * via email senza salvarla. Si può cambiare con VITE_CONTACT_ENDPOINT.
    */
-  contactEndpoint: (import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined) ?? '',
+  contactEndpoint: (import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined) || '/api/contact',
 } as const
 
 /**
@@ -102,12 +102,14 @@ export const site = {
  * vengono mostrati e non vengono inventati.
  */
 export const owner = {
-  name: null as string | null,
-  email: null as string | null,
+  name: 'Christian Maiolo' as string | null,
+  email: 'support@crm-lab.it' as string | null,
   address: null as string | null,
   vat: null as string | null,
   /** Fornitore dell'hosting, responsabile del trattamento per i log tecnici. */
   hosting: 'Vercel Inc.' as string | null,
+  /** Servizio che recapita via email i messaggi del modulo, responsabile del trattamento. */
+  mailer: 'Resend (Plus Five Five, Inc.)' as string | null,
 } as const
 
 /** L'informativa può essere pubblicata solo se il titolare è identificabile. */
@@ -124,7 +126,7 @@ export const canPublishPrivacy = Boolean(owner.name && owner.email)
  *  cookiePrefs    → solo se esiste un sistema di consenso che permette di cambiare le scelte
  */
 export const legal = {
-  privacy: null as string | null,
+  privacy: '/privacy' as string | null,
   cookiePolicy: null as string | null,
   cookiePrefs: false,
 } as const

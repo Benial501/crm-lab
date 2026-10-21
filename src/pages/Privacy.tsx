@@ -124,6 +124,15 @@ export function Privacy() {
               dall’Unione europea avviene sulla base delle garanzie previste dal fornitore.
             </p>
           )}
+          {owner.mailer && (
+            <p>
+              I messaggi del modulo vengono recapitati via email tramite{' '}
+              <strong>{owner.mailer}</strong>, responsabile del trattamento: il sito non li salva in
+              nessun database, li inoltra soltanto alla nostra casella di posta. Anche in questo
+              caso il trasferimento fuori dall’Unione europea avviene sulla base delle Clausole
+              contrattuali standard e del Data Privacy Framework UE-USA.
+            </p>
+          )}
         </section>
 
         <section className="legal__block">
