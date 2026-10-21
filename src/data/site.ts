@@ -13,7 +13,8 @@ export type Channel = {
    * Il dato reale del canale. Finché è una stringa vuota l'icona resta visibile
    * nel sito ma non è cliccabile: nessun collegamento viene inventato.
    *
-   *  whatsapp  → numero in formato internazionale, solo cifre: '393401234567'
+   *  whatsapp  → numero in formato internazionale, solo cifre: '393401234567',
+   *              oppure il link completo (https://…) del messaggio WhatsApp
    *  email     → indirizzo: 'ciao@crmlab.it'
    *  instagram → nome utente senza chiocciola: 'crmlab'
    *  tiktok    → nome utente senza chiocciola: 'crmlab'
@@ -24,6 +25,7 @@ export type Channel = {
 /** Costruisce il collegamento del canale, o null se non è ancora configurato. */
 export function channelHref(channel: Channel): string | null {
   if (!channel.value) return null
+  if (/^https?:\/\//.test(channel.value)) return channel.value
   switch (channel.id) {
     case 'whatsapp':
       return `https://wa.me/${channel.value.replace(/\D/g, '')}`
@@ -48,7 +50,7 @@ export function channelDisplay(channel: Channel): string {
   if (!channel.value) return CHANNEL_PENDING
   switch (channel.id) {
     case 'whatsapp':
-      return `+${channel.value.replace(/\D/g, '')}`
+      return /^https?:\/\//.test(channel.value) ? 'Scrivimi su WhatsApp' : `+${channel.value.replace(/\D/g, '')}`
     case 'email':
       return channel.value
     case 'instagram':
@@ -63,10 +65,10 @@ export function channelDisplay(channel: Channel): string {
  * vero in footer, nella sezione contatti e nel menu del telefono.
  */
 export const channels: Channel[] = [
-  { id: 'whatsapp', label: 'WhatsApp', value: '' },
+  { id: 'whatsapp', label: 'WhatsApp', value: 'https://api.whatsapp.com/message/JNHZKUNROQD2J1?autoload=1&app_absent=0' },
   { id: 'email', label: 'Email', value: '' },
-  { id: 'instagram', label: 'Instagram', value: '' },
-  { id: 'tiktok', label: 'TikTok', value: '' },
+  { id: 'instagram', label: 'Instagram', value: 'crm._.lab' },
+  { id: 'tiktok', label: 'TikTok', value: 'crmlab3' },
 ]
 
 export const site = {
