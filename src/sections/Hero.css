@@ -82,11 +82,94 @@
   }
 }
 
+/* ---------- Le quattro aree, in fila che scorre ----------
+   Si muove piano e da sola; si ferma sotto il puntatore o quando
+   un'area riceve il fuoco, e resta ferma per chi riduce il movimento. */
+.hero__marquee {
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  overflow: hidden;
+  border-block: 1px solid var(--hairline);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.hero__track {
+  display: flex;
+  width: max-content;
+  animation: hero-marquee 32s linear infinite;
+}
+
+.hero__marquee:hover .hero__track,
+.hero__marquee:focus-within .hero__track {
+  animation-play-state: paused;
+}
+
+.hero__areas {
+  display: flex;
+  flex: none;
+}
+
+.hero__areas li {
+  flex: none;
+  width: clamp(16rem, 24vw, 21rem);
+  border-right: 1px solid var(--hairline);
+}
+
+@keyframes hero-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__track {
+    animation: none;
+  }
+
+  .hero__marquee {
+    overflow-x: auto;
+  }
+}
+
+.area {
+  display: grid;
+  gap: 0.75rem;
+  height: 100%;
+  padding: clamp(1.4rem, 2.2vw, 2rem) clamp(1.25rem, 2vw, 1.75rem);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.area:hover,
+.area:focus-visible {
+  background: var(--surface);
+}
+
+.area__glyph {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.area:hover .area__glyph,
+.area:focus-visible .area__glyph {
+  transform: translateY(-2px);
+}
+
+.area__title {
+  font-size: var(--step-body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.area__body {
+  font-size: var(--step-body);
+  color: var(--on-dark-soft);
+  max-width: 28ch;
+}
+
 /* ---------- Ingresso ---------- */
 @media (prefers-reduced-motion: no-preference) {
   .hero__say,
   .hero__media,
-  .hero__areas {
+  .hero__marquee {
     animation: hero-rise 820ms var(--ease-out) backwards;
   }
 
@@ -94,7 +177,7 @@
     animation-delay: 110ms;
   }
 
-  .hero__areas {
+  .hero__marquee {
     animation-delay: 220ms;
   }
 
