@@ -103,6 +103,7 @@ export function Footer() {
           </ul>
         )}
         {site.legal && <p>{site.legal}</p>}
+        <p>IBAN per i pagamenti: IT64N0366901600067012839561</p>
       </div>
     </footer>
   )
