@@ -55,6 +55,16 @@
   margin-top: 2.25rem;
 }
 
+.hero__prices {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .hero__actions .hero__prices {
+    display: inline-flex;
+  }
+}
+
 @media (max-width: 479px) {
   .hero__actions .btn {
     flex: 1 1 100%;

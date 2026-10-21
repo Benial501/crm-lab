@@ -41,6 +41,15 @@ export function Hero() {
                 Vedi i progetti
                 <Icon name="arrow" size={15} className="btn__arrow" />
               </a>
+              {/* Solo su mobile: su desktop i prezzi sono già nella navigazione */}
+              <a
+                href="/#prezzi"
+                className="btn btn--ghost hero__prices"
+                onClick={goToSection('/#prezzi')}
+              >
+                Visualizza prezzi
+                <Icon name="arrow" size={15} className="btn__arrow" />
+              </a>
             </div>
           </div>
 
