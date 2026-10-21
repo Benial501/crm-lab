@@ -23,8 +23,7 @@ export function Projects() {
             Progetti
           </h2>
           <p className="band-head__body">
-            Un’applicazione dello studio già in uso e quattro concept da aprire e provare. Ogni
-            scheda dice cosa è reale e cosa è simulato.
+            I progetti visualizzati sono progetti realizzati da CRM LAB.
           </p>
         </div>
 

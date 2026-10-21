@@ -25,10 +25,6 @@ export function Services({ onAsk }: ServicesProps) {
           <h2 className="band-head__title" id="servizi-title">
             Cosa sviluppo
           </h2>
-          <p className="band-head__body">
-            Siti, negozi online, automazioni e strumenti interni: scelgo le funzioni in base al lavoro
-            da semplificare e agli strumenti che usi già.
-          </p>
         </div>
 
         <Rail className="services__list rail--compact" label="Le quattro aree" desktop>

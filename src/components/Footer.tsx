@@ -80,7 +80,6 @@ export function Footer() {
 
       <div className="board footer__bottom">
         <p>© {year} CRM LAB</p>
-        <p>WALLT è un’applicazione dello studio in uso al suo indirizzo pubblico; gli altri tre progetti sono concept dimostrativi, non lavori commissionati.</p>
         {(legal.privacy || legal.cookiePolicy || legal.cookiePrefs) && (
           <ul className="footer__legal">
             {legal.privacy && (
