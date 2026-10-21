@@ -88,6 +88,11 @@
     text-align: right;
   }
 
+  .plan__more {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
   .plan__action {
     grid-column: 3;
     grid-row: 3;
@@ -180,14 +185,10 @@
 }
 
 /* ---------- La nota comune ---------- */
-.pricing__note--lead {
+.pricing__note {
   max-width: 78ch;
-  margin-top: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-  padding: clamp(1rem, 2vw, 1.25rem) clamp(1rem, 2vw, 1.5rem);
-  border-left: 2px solid var(--accent-deep);
-  background: rgba(0, 0, 0, 0.03);
-  font-size: var(--step-body);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  font-size: var(--step-small);
   line-height: 1.7;
   color: var(--on-light-soft);
 }
@@ -214,7 +215,8 @@
     order: 3;
   }
 
-  .plan__sets {
+  .plan__sets,
+  .plan__more {
     order: 4;
   }
 
@@ -262,7 +264,8 @@
     order: 3;
   }
 
-  .rail .plan__sets {
+  .rail .plan__sets,
+  .rail .plan__more {
     order: 4;
     margin-top: 0.9rem;
   }
@@ -275,4 +278,41 @@
     margin-top: auto;
     padding-top: 1.2rem;
   }
+}
+
+/* ---------- Il resto del perimetro, da aprire ---------- */
+.plan__more {
+  border-top: 1px solid var(--hairline-light);
+}
+
+.plan__more-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+  font-size: var(--step-small);
+  font-weight: 500;
+  color: var(--on-light-soft);
+  cursor: pointer;
+  list-style: none;
+}
+
+.plan__more-head::-webkit-details-marker {
+  display: none;
+}
+
+.plan__more-mark {
+  flex: none;
+  color: var(--accent-deep);
+  transform: rotate(90deg);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.plan__more[open] .plan__more-mark {
+  transform: rotate(-90deg);
+}
+
+.plan__more .plan__sets {
+  padding-block: 0.25rem 0.75rem;
 }

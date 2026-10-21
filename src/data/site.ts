@@ -128,10 +128,10 @@ export const legal = {
 } as const
 
 export const navigation = [
-  { label: 'Progetti', href: '/#progetti' },
   { label: 'Servizi', href: '/#servizi' },
-  { label: 'Metodo', href: '/#metodo' },
+  { label: 'Progetti', href: '/#progetti' },
   { label: 'Prezzi', href: '/#prezzi' },
+  { label: 'Metodo', href: '/#metodo' },
   { label: 'Studio', href: '/#studio' },
   { label: 'Contatti', href: '/#contatti' },
 ] as const

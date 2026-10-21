@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Icon } from '../components/Icon'
 import { Reveal } from '../components/Reveal'
+import { assurances } from '../data/assurances'
 import { faq } from '../data/faq'
 import './Faq.css'
 
@@ -35,15 +36,17 @@ export function Faq() {
       <div className="board">
         <div className="band-head">
           <h2 className="band-head__title" id="domande-title">
-            Domande frequenti
+            Prima di iniziare
           </h2>
           <p className="band-head__body">
-            Undici risposte su progetto, pagamenti, tempi, costi e consegna.
+            Come si imposta il lavoro e le risposte su progetto, pagamenti, tempi, costi e consegna.
           </p>
         </div>
 
+        {/* Le condizioni del rapporto aprono l'elenco: sono le prime
+            domande che nascono dopo aver letto un prezzo. */}
         <ul className="faq__list">
-          {faq.map((item, i) => (
+          {[...assurances.map((a) => ({ q: a.title, a: a.body })), ...faq].map((item, i) => (
             <FaqRow key={item.q} question={item.q} answer={item.a} index={i} />
           ))}
         </ul>

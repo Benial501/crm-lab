@@ -39,6 +39,8 @@ type RailProps = {
   className?: string
   /** Come si chiama questa fila, per chi naviga con lo schermo letto. */
   label: string
+  /** Fila anche da tablet e desktop, non solo su telefono. */
+  desktop?: boolean
 }
 
 /**
@@ -50,10 +52,12 @@ type RailProps = {
  * subito che si scorre. Da tablet in su il componente non fa niente:
  * restituisce lo stesso elenco di prima, con le stesse classi.
  */
-export function Rail({ children, as: Tag = 'div', className = '', label }: RailProps) {
-  const isRail = useIsRail()
+export function Rail({ children, as: Tag = 'div', className = '', label, desktop = false }: RailProps) {
+  const isNarrow = useIsRail()
+  const isRail = desktop || isNarrow
   const ref = useRef<HTMLElement | null>(null)
   const [index, setIndex] = useState(0)
+  const [atEnd, setAtEnd] = useState(false)
   const count = Children.count(children)
 
   // Quale scheda è in mezzo allo schermo: è quella che il contatore e il
@@ -68,17 +72,23 @@ export function Rail({ children, as: Tag = 'div', className = '', label }: RailP
       frame = requestAnimationFrame(() => {
         const kids = Array.from(el.children) as HTMLElement[]
         if (!kids.length) return
-        const middle = el.scrollLeft + el.clientWidth / 2
+        // Da desktop si vedono più schede insieme: conta quella a sinistra.
+        const wide = desktop && !isNarrow
+        const anchor = wide
+          ? el.scrollLeft + kids[0].offsetLeft
+          : el.scrollLeft + el.clientWidth / 2
         let best = 0
         let bestDistance = Infinity
         kids.forEach((kid, i) => {
-          const distance = Math.abs(kid.offsetLeft + kid.offsetWidth / 2 - middle)
+          const point = wide ? kid.offsetLeft : kid.offsetLeft + kid.offsetWidth / 2
+          const distance = Math.abs(point - anchor)
           if (distance < bestDistance) {
             bestDistance = distance
             best = i
           }
         })
         setIndex(best)
+        setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2)
       })
     }
 
@@ -90,14 +100,14 @@ export function Rail({ children, as: Tag = 'div', className = '', label }: RailP
       window.removeEventListener('resize', sync)
       cancelAnimationFrame(frame)
     }
-  }, [isRail, count])
+  }, [isRail, isNarrow, desktop, count])
 
   const jumpTo = useCallback((i: number) => {
     const el = ref.current
     const kid = el?.children[i] as HTMLElement | undefined
     if (!el || !kid) return
     el.scrollTo({
-      left: kid.offsetLeft,
+      left: kid.offsetLeft - (el.children[0] as HTMLElement).offsetLeft,
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     })
   }, [])
@@ -105,7 +115,7 @@ export function Rail({ children, as: Tag = 'div', className = '', label }: RailP
   const list = (
     <Tag
       ref={ref as React.Ref<HTMLElement>}
-      className={isRail ? `${className} rail` : className}
+      className={isRail ? `${className} rail${desktop ? ' rail--desktop' : ''}` : className}
       tabIndex={isRail ? 0 : undefined}
       role={isRail ? 'group' : undefined}
       aria-label={isRail ? `${label} — scorri di lato per vederle tutte` : undefined}
@@ -123,6 +133,26 @@ export function Rail({ children, as: Tag = 'div', className = '', label }: RailP
         <p className="rail-nav__count" aria-hidden="true">
           <b>{index + 1}</b> / {count}
         </p>
+        {desktop && (
+          <div className="rail-arrows">
+            <button
+              type="button"
+              className="rail-arrow rail-arrow--prev"
+              onClick={() => jumpTo(Math.max(0, index - 1))}
+              disabled={index === 0}
+            >
+              <span className="visually-hidden">{`${label}: scheda precedente`}</span>
+            </button>
+            <button
+              type="button"
+              className="rail-arrow"
+              onClick={() => jumpTo(Math.min(count - 1, index + 1))}
+              disabled={atEnd}
+            >
+              <span className="visually-hidden">{`${label}: scheda successiva`}</span>
+            </button>
+          </div>
+        )}
         <ul className="rail-dots">
           {Array.from({ length: count }, (_, i) => (
             <li key={i}>

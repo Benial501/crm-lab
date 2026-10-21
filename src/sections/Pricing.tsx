@@ -4,6 +4,9 @@ import { Reveal } from '../components/Reveal'
 import { currency, pricingNote, priceGroups } from '../data/pricing'
 import './Pricing.css'
 
+/** Quante voci di «Include» restano sempre in vista. */
+const SHOWN = 4
+
 type PricingProps = {
   /** Porta la richiesta al modulo contatti con il pacchetto già selezionato. */
   onSelect: (id: string) => void
@@ -38,16 +41,13 @@ export function Pricing({ onSelect }: PricingProps) {
       <div className="board">
         <div className="band-head">
           <h2 className="band-head__title" id="prezzi-title">
-            Da dove si parte
+            Prezzi
           </h2>
           <p className="band-head__body">
-            Ogni voce dice che cosa comprende e che cosa no. Dove il perimetro cambia troppo da
-            un’attività all’altra indico «su preventivo» invece di inventare una cifra.
+            Prezzi di partenza, con quello che comprendono e quello che no. Dove il perimetro cambia
+            troppo indico «su preventivo» invece di inventare una cifra.
           </p>
         </div>
-
-        {/* La nota sta qui, prima dei prezzi: è la condizione per leggerli. */}
-        <p className="pricing__note pricing__note--lead">{pricingNote}</p>
 
         {priceGroups.map((group) => (
           <section className="family" key={group.id} aria-labelledby={`listino-${group.id}`}>
@@ -79,12 +79,24 @@ export function Pricing({ onSelect }: PricingProps) {
                   <p className="plan__desc">{item.description}</p>
 
                   <div className="plan__sets">
-                    <PlanList title="Include" items={item.includes} tone="in" />
-                    {item.dependsOn && (
-                      <PlanList title="Il prezzo dipende da" items={item.dependsOn} tone="in" />
-                    )}
-                    <PlanList title="Non include" items={item.excludes} tone="out" />
+                    <PlanList title="Include" items={item.includes.slice(0, SHOWN)} tone="in" />
                   </div>
+
+                  {/* Il resto del perimetro resta a un tocco: la scheda si legge
+                      in uno schermo e nessuna voce sparisce. */}
+                  <details className="plan__more">
+                    <summary className="plan__more-head">
+                      Tutto il dettaglio
+                      <Icon name="arrow" size={14} className="plan__more-mark" />
+                    </summary>
+                    <div className="plan__sets">
+                      <PlanList title="Include anche" items={item.includes.slice(SHOWN)} tone="in" />
+                      {item.dependsOn && (
+                        <PlanList title="Il prezzo dipende da" items={item.dependsOn} tone="in" />
+                      )}
+                      <PlanList title="Non include" items={item.excludes} tone="out" />
+                    </div>
+                  </details>
 
                   <button type="button" className="btn btn--ghost plan__action" onClick={() => onSelect(item.id)}>
                     Chiedi un preventivo
@@ -95,6 +107,10 @@ export function Pricing({ onSelect }: PricingProps) {
             </Rail>
           </section>
         ))}
+
+        {/* Le condizioni comuni chiudono il listino: chi cerca il prezzo
+            lo trova subito, chi vuole i dettagli li legge qui. */}
+        <p className="pricing__note">{pricingNote}</p>
       </div>
     </section>
   )

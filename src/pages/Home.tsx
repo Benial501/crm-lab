@@ -4,7 +4,6 @@ import { Hero } from '../sections/Hero'
 import { Services } from '../sections/Services'
 import { AutomationSection } from '../sections/AutomationSection'
 import { Pricing } from '../sections/Pricing'
-import { BeforeStart } from '../sections/BeforeStart'
 import { Faq } from '../sections/Faq'
 import { Process } from '../sections/Process'
 import { Projects } from '../sections/Projects'
@@ -49,12 +48,11 @@ export function Home() {
   return (
     <>
       <Hero />
-      <Projects />
       <Services onAsk={askAbout} />
-      <AutomationSection />
-      <Process />
+      <Projects />
       <Pricing onSelect={askAbout} />
-      <BeforeStart />
+      <Process />
+      <AutomationSection />
       <Faq />
       <Studio />
       <Testimonials />

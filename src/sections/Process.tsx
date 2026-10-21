@@ -170,13 +170,12 @@ export function Process() {
             Come si sviluppa un progetto
           </h2>
           <p className="band-head__body">
-            Cinque fasi, sempre nello stesso ordine. Per ciascuna trovi un esempio dello strumento di
-            lavoro: note di analisi, schema delle schermate, tabella degli stati, verifiche e
-            consegna. Concordo tempi e durata nella proposta, prima di iniziare.
+            Cinque fasi, sempre nello stesso ordine, ognuna con un esempio dello strumento di lavoro.
+            Tempi e durata li concordiamo nella proposta, prima di iniziare.
           </p>
         </div>
 
-        <Rail as="ol" className="process__list" label="Le cinque fasi">
+        <Rail as="ol" className="process__list" label="Le cinque fasi" desktop>
           {processSteps.map((step, i) => (
             <Reveal as="li" key={step.n} delay={i * 60} className="phase">
               <div className="phase__say">

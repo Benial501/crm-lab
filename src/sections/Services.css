@@ -91,7 +91,6 @@
    Si vedono una alla volta, con il conto sotto, invece di scorrere
    per quattro schermate senza sapere quante ne restano.
    --------------------------------------------------------------- */
-@media (max-width: 859px) {
   .services__list.rail > .srv {
     display: block;
     padding-block: var(--pad);
@@ -140,4 +139,3 @@
   .srv__fold-body {
     padding-top: 0.5rem;
   }
-}

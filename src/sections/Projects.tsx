@@ -23,13 +23,12 @@ export function Projects() {
             Progetti
           </h2>
           <p className="band-head__body">
-            WALLT è un’applicazione dello studio, in uso al suo indirizzo pubblico. Gli altri tre
-            sono concept dimostrativi, non lavori commissionati. Ogni scheda chiarisce cosa si può
-            provare e cosa è simulato.
+            Un’applicazione dello studio già in uso e quattro concept da aprire e provare. Ogni
+            scheda dice cosa è reale e cosa è simulato.
           </p>
         </div>
 
-        <Rail className="projects__list" label="I progetti dello studio">
+        <Rail className="projects__list" label="I progetti dello studio" desktop>
           {projects.map((project, i) => {
             const main = project.shots[0]
             const phone = project.shots.find((s) => s.ratio === '9/19')

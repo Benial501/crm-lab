@@ -35,7 +35,8 @@
   background: var(--surface);
 }
 
-.automation-card--flow {
+.automation-card--flow,
+.automation-card--integrations {
   grid-column: 1 / -1;
 }
 
@@ -190,8 +191,7 @@
 .flow-status__analysis,
 .flow-status__complete { grid-area: 1 / 2; white-space: nowrap; }
 
-.flow-core__status i,
-.efficiency-chart__note span {
+.flow-core__status i {
   width: .35rem;
   height: .35rem;
   flex: none;
@@ -328,32 +328,6 @@
 .crm .integration-node__mark { color: var(--accent-bright); }
 .whatsapp .integration-node__mark { color: #83c99a; }
 
-/* Illustrative comparison, explored with three keyboard-accessible controls. */
-.efficiency-chart { width: min(100%, 34rem); margin-inline: auto; }
-.efficiency-chart__controls { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
-.efficiency-chart__controls button {
-  min-height: 2.25rem;
-  padding: .35rem .6rem;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius);
-  background: transparent;
-  color: var(--on-dark-soft);
-  font-size: .7rem;
-  cursor: pointer;
-}
-.efficiency-chart__controls button:hover,
-.efficiency-chart__controls button.is-active { border-color: var(--hairline-strong); background: var(--surface-2); color: var(--on-dark); }
-.efficiency-chart__plot { display: grid; gap: 1.1rem; }
-.chart-row { display: grid; grid-template-columns: minmax(5.5rem, .8fr) minmax(4rem, 1.8fr) 1.5rem; align-items: center; gap: .65rem; font-size: .72rem; }
-.chart-row > span { color: var(--on-dark-soft); }
-.chart-row > b { font-size: .7rem; font-weight: 500; text-align: right; }
-.chart-track { height: .5rem; overflow: hidden; background: rgba(255,255,255,.07); }
-.chart-bar { display: block; height: 100%; transition: width 350ms var(--ease-out); }
-.chart-bar--manual { background: #777b84; }
-.chart-bar--auto { background: var(--accent); }
-.chart-axis { display: flex; justify-content: space-between; margin-left: calc(5.5rem + .65rem); color: var(--on-dark-soft); font-size: .62rem; }
-.efficiency-chart__note { display: flex; align-items: center; gap: .45rem; margin-top: 1.2rem; color: var(--on-dark-soft); font-size: .67rem; }
-.efficiency-chart__note span { width: .3rem; height: .3rem; }
 
 @media (max-width: 760px) {
   .automation__head { display: block; }
@@ -384,8 +358,6 @@
   .integration-map { height: 13rem; }
   .integration-node { min-height: 2.5rem; gap: .3rem; padding-inline: .45rem; font-size: .67rem; }
   .integration-center { width: 6.5rem; }
-  .chart-row { grid-template-columns: minmax(4.75rem, .8fr) minmax(3rem, 1.8fr) 1.2rem; gap: .4rem; font-size: .66rem; }
-  .chart-axis { margin-left: calc(4.75rem + .4rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -400,5 +372,4 @@
   .flow-status__analysis { display: none; }
   .flow-status__complete { display: inline; }
   .flow-result { opacity: 1; border-color: var(--hairline-strong); }
-  .chart-bar { transition: none; }
 }

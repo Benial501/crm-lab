@@ -1,5 +1,5 @@
 import { Icon } from '../components/Icon'
-import { Rail, useIsRail } from '../components/Rail'
+import { Rail } from '../components/Rail'
 import { Reveal } from '../components/Reveal'
 import { services } from '../data/services'
 import './Services.css'
@@ -18,8 +18,6 @@ type ServicesProps = {
  * problema risolto e per funzioni che possono entrare nel progetto.
  */
 export function Services({ onAsk }: ServicesProps) {
-  const isRail = useIsRail()
-
   return (
     <section className="band services" id="servizi" aria-labelledby="servizi-title">
       <div className="board">
@@ -33,7 +31,7 @@ export function Services({ onAsk }: ServicesProps) {
           </p>
         </div>
 
-        <Rail className="services__list" label="Le quattro aree">
+        <Rail className="services__list rail--compact" label="Le quattro aree" desktop>
           {services.map((service, i) => (
             <Reveal key={service.id} delay={i * 70} className="srv">
               <div className="srv__say">
@@ -46,11 +44,9 @@ export function Services({ onAsk }: ServicesProps) {
                 </button>
               </div>
 
-              {/* Su telefono il ragionamento lungo sta dietro una riga da
-                  aprire: la scheda resta leggibile in uno schermo, e chi
-                  vuole il dettaglio lo trova dov'è sempre stato. */}
-              {isRail ? (
-                <details className="srv__problem srv__fold">
+              {/* Il ragionamento lungo sta dietro una riga da aprire: la scheda
+                  resta leggibile in uno schermo. */}
+              <details className="srv__problem srv__fold">
                   <summary className="srv__fold-head">
                     Il problema di partenza, e come lo affrontiamo
                     <Icon name="arrow" size={14} className="srv__fold-mark" />
@@ -62,14 +58,6 @@ export function Services({ onAsk }: ServicesProps) {
                     <p>{service.detail}</p>
                   </div>
                 </details>
-              ) : (
-                <div className="srv__problem">
-                  <h4 className="srv__sub">Il problema di partenza</h4>
-                  <p>{service.problem}</p>
-                  <h4 className="srv__sub srv__sub--spaced">Come lo affrontiamo</h4>
-                  <p>{service.detail}</p>
-                </div>
-              )}
 
               <div className="srv__includes">
                 <h4 className="srv__sub">Cosa può includere</h4>

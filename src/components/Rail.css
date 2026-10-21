@@ -5,12 +5,13 @@
    chi arriva non vede mai due cose insieme e non capisce quante sono.
    Qui l'elenco si ricompone in una striscia che si scorre con il
    pollice, una scheda alla volta, con il conto sotto. Da tablet in su
-   non esiste: questo foglio vive tutto dentro la media query.
+   resta una fila solo dove la sezione lo chiede (.rail--desktop).
 
    La doppia classe (.rail.rail) serve a vincere senza !important sul
    display: grid che l'elenco ha già nel foglio della sua sezione.
    --------------------------------------------------------------- */
-@media (max-width: 859px) {
+/* Le regole valgono solo dove la classe .rail c'è: su telefono sempre,
+   da tablet in su solo per le file con .rail--desktop. */
   .rail-wrap {
     position: relative;
   }
@@ -130,5 +131,73 @@
 
   .on-light .rail-dot--on::before {
     background: var(--accent-deep);
+  }
+
+/* ---------- Fila da desktop: schede larghe e frecce ---------- */
+.rail-arrows {
+  display: none;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.rail-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 50%;
+  background: none;
+  color: var(--on-dark);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+
+.rail-arrow::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateX(-2px) rotate(45deg);
+}
+
+.rail-arrow--prev::before {
+  transform: translateX(2px) rotate(-135deg);
+}
+
+.rail-arrow:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.rail-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.on-light .rail-arrow {
+  color: var(--on-light);
+  border-color: rgba(11, 12, 15, 0.22);
+}
+
+@media (min-width: 860px) {
+  .rail-arrows {
+    display: flex;
+  }
+
+  .rail--desktop.rail > * {
+    flex-basis: min(88%, 60rem);
+    padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  }
+
+  /* Le schede strette (servizi) stanno in tre per riga. */
+  .rail--compact.rail > * {
+    flex-basis: min(46%, 27rem);
+  }
+
+  .rail--desktop .rail-dots,
+  .rail-wrap:has(.rail--desktop) .rail-dots {
+    margin-left: 1rem;
   }
 }

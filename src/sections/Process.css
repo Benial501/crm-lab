@@ -22,11 +22,6 @@
   .phase {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
-
-  /* Le fasi pari rovesciano la riga: lo schema non è una colonna sola. */
-  .phase:nth-child(even) .phase__say {
-    order: 2;
-  }
 }
 
 .phase__n {

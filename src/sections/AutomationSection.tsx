@@ -9,12 +9,6 @@ const integrations = [
   { id: 'whatsapp', label: 'WhatsApp', mark: '◌', className: 'whatsapp' },
 ]
 
-const comparisons = [
-  { id: 'tempo', label: 'Tempo di elaborazione', manual: 'Manuale', automated: 'Automatizzato' },
-  { id: 'passaggi', label: 'Passaggi manuali', manual: 'Manuale', automated: 'Automatizzato' },
-  { id: 'attivita', label: 'Attività completate', manual: 'Manuale', automated: 'Automatizzato' },
-] as const
-
 function AutomationFlow() {
   const ref = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(false)
@@ -107,31 +101,6 @@ function IntegrationDiagram() {
   )
 }
 
-function EfficiencyChart() {
-  const [metric, setMetric] = useState<(typeof comparisons)[number]['id']>('tempo')
-  const active = comparisons.find((item) => item.id === metric) ?? comparisons[0]
-  const values: Record<typeof metric, { manual: number; automated: number; unit: string }> = {
-    tempo: { manual: 78, automated: 36, unit: 'tempo relativo' },
-    passaggi: { manual: 78, automated: 28, unit: 'passaggi relativi' },
-    attivita: { manual: 40, automated: 78, unit: 'attività relative' },
-  }
-  const value = values[metric]
-
-  return (
-    <div className="efficiency-chart">
-      <div className="efficiency-chart__controls" role="group" aria-label="Scegli cosa confrontare">
-        {comparisons.map((item) => <button key={item.id} type="button" className={metric === item.id ? 'is-active' : ''} aria-pressed={metric === item.id} onClick={() => setMetric(item.id)}>{item.label}</button>)}
-      </div>
-      <div className="efficiency-chart__plot" role="img" aria-label={`${active.label}. ${active.manual}: ${value.manual} su 100; ${active.automated}: ${value.automated} su 100. Esempio illustrativo, non sono risultati misurati.`}>
-        <div className="chart-row"><span>{active.manual}</span><div className="chart-track"><i className="chart-bar chart-bar--manual" style={{ width: `${value.manual}%` }} /></div><b>{value.manual}</b></div>
-        <div className="chart-row"><span>{active.automated}</span><div className="chart-track"><i className="chart-bar chart-bar--auto" style={{ width: `${value.automated}%` }} /></div><b>{value.automated}</b></div>
-        <div className="chart-axis"><span>0</span><span>Valore relativo · 100</span><span>100</span></div>
-      </div>
-      <p className="efficiency-chart__note"><span />Esempio illustrativo · {value.unit}</p>
-    </div>
-  )
-}
-
 export function AutomationSection() {
   return (
     <section className="band automation" id="automazioni" aria-labelledby="automation-title">
@@ -149,10 +118,6 @@ export function AutomationSection() {
           <Reveal delay={90} className="automation-card automation-card--integrations">
             <div className="automation-card__visual"><IntegrationDiagram /></div>
             <div className="automation-card__copy"><p className="automation-card__index">02 / Le connessioni</p><h3>I tuoi strumenti, finalmente collegati.</h3><p>Collego applicazioni e servizi per eliminare passaggi manuali e far comunicare i tuoi sistemi. Gli esempi non indicano integrazioni già attive.</p></div>
-          </Reveal>
-          <Reveal delay={160} className="automation-card automation-card--results">
-            <div className="automation-card__visual"><EfficiencyChart /></div>
-            <div className="automation-card__copy"><p className="automation-card__index">03 / Il beneficio</p><h3>Più efficienza, meno attività ripetitive.</h3><p>Riduci il tempo dedicato alle operazioni manuali e concentra le risorse sulle attività a maggior valore.</p></div>
           </Reveal>
         </div>
       </div>
