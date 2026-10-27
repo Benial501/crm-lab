@@ -485,7 +485,7 @@ export const projects: Project[] = [
       poster: '/img/atelier-cover',
       posterWidths: [640, 960, 1280],
       posterAlt:
-        'La homepage di ATELIER: il titolo «La giacca giusta si sceglie con calma.» accanto a una giacca in velluto a coste color tabacco.',
+        'Due portatili su fondo scuro: sul primo il pannello del negozio, «Il negozio, oggi», sul secondo la scheda della giacca in velluto a coste con il metro delle taglie; a sinistra il logo CRM LAB, la scritta «ATELIER» e «Negozio online. Gestionale su misura.».',
       duration: '4:34',
     },
     shots: [

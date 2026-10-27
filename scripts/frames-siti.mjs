@@ -5,11 +5,8 @@
    Sorgente: i montaggi a 1920×1080 in video/ (fuori dal repository, vedi
              .gitignore).
    Esito:    public/video/<slug>-presentazione.mp4 e le schermate
-             public/img/<slug>-*. Per Linea Outdoor e Casale Aurora la
-             copertina del video non nasce qui: è un'immagine a sé, in
-             desing-references/originals/<slug>-cover.webp. Per ATELIER la
-             copertina è il primo fotogramma del video, già senza titoli né
-             sottotitoli.
+             public/img/<slug>-*. La copertina del video non nasce qui: è
+             un'immagine a sé, in desing-references/originals/<slug>-cover.webp.
 
    Uso: node scripts/frames-siti.mjs [linea-outdoor|casale-aurora|atelier]  */
 import { execFileSync } from 'node:child_process'
@@ -60,7 +57,6 @@ const sites = {
   atelier: {
     src: 'video/atelier-estesa.mp4',
     crop: 'crop=1816:908:52:82',
-    cover: 0,
     shots: [
       { t: 0.5, name: 'home' },
       { t: 41, name: 'prodotto' },
@@ -78,12 +74,11 @@ const sites = {
   },
 }
 const WIDTHS = [800, 1200, 1600]
-const COVER_WIDTHS = [640, 960, 1280]
 
 const ff = (args) => execFileSync('ffmpeg', ['-v', 'error', ...args], { stdio: 'inherit' })
 
-function variants(raw, name, widths = WIDTHS) {
-  for (const w of widths) {
+function variants(raw, name) {
+  for (const w of WIDTHS) {
     execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '80', '--resampleWidth', String(w),
       raw, '--out', join(IMG, `${name}-${w}.jpg`)], { stdio: 'ignore' })
     execFileSync('cwebp', ['-q', '80', '-resize', String(w), '0', raw, '-o', join(IMG, `${name}-${w}.webp`)],
@@ -106,13 +101,6 @@ for (const [slug, site] of Object.entries(sites)) {
   ff(['-i', site.src, '-vf', 'scale=1280:-2', '-c:v', 'libx264', '-crf', '30', '-preset', 'slow',
     '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-movflags', '+faststart',
     '-c:a', 'aac', '-b:a', '96k', join(VID, `${slug}-presentazione.mp4`), '-y'])
-
-  if (site.cover !== undefined) {
-    const raw = join(tmp, 'cover.png')
-    ff(['-ss', String(site.cover), '-i', site.src, '-frames:v', '1', raw, '-y'])
-    variants(raw, `${slug}-cover`, COVER_WIDTHS)
-    console.log('fatto:', `${slug}-cover`)
-  }
 
   for (const shot of site.shots) {
     const raw = join(tmp, `${shot.name}.png`)
