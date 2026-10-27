@@ -6,11 +6,12 @@
    - `prodotto`  un'applicazione realizzata dallo studio e in uso
                  davvero, raggiungibile al suo indirizzo pubblico;
    - `concept`   un lavoro dimostrativo costruito dallo studio, non
-                 commissionato, navigabile come demo dentro questo sito.
+                 commissionato: navigabile come demo, o mostrato per
+                 intero nel suo video di presentazione.
 
    Niente mockup e niente fotografie di repertorio: ogni immagine è una
-   schermata vera: catturata dalla demo per i concept, presa dal video
-   di presentazione per i prodotti.
+   schermata vera: catturata dalla demo, o presa dal video di
+   presentazione dove c'è.
 
    Regola per chi modifica questo file: in `canTry` va solo quello che
    il progetto fa davvero. Un pulsante o una voce di menu non sono una
@@ -18,12 +19,15 @@
    --------------------------------------------------------------- */
 
 export type Shot = {
-  /** Percorso senza suffisso di larghezza, es. "/img/demo-legale-desktop". */
+  /** Percorso senza suffisso di larghezza, es. "/img/demo-shop-desktop". */
   base: string
   widths: number[]
   alt: string
-  /** Proporzione del fotogramma, per riservare lo spazio prima del caricamento. */
-  ratio: '16/10' | '9/19'
+  /**
+   * Proporzione del fotogramma, per riservare lo spazio prima del caricamento.
+   * 48/25 è un fotogramma 16:9 senza la fascia dei sottotitoli del video.
+   */
+  ratio: '16/10' | '48/25' | '9/19'
 }
 
 export type Video = {
@@ -47,8 +51,11 @@ export type Project = {
    * concept non va mai presentato come un prodotto consegnato.
    */
   kind: 'prodotto' | 'concept'
-  /** L'azione principale: la demo interna, o l'indirizzo pubblico. */
-  action: { href: string; label: string; external?: boolean }
+  /**
+   * L'azione principale: la demo interna, o l'indirizzo pubblico. Manca
+   * quando il progetto si vede solo nel suo video di presentazione.
+   */
+  action?: { href: string; label: string; external?: boolean }
   /** Nome del prodotto. */
   brand: string
   /** Due righe per la homepage: a chi serve e a cosa. */
@@ -59,7 +66,7 @@ export type Project = {
   need: string
   /** La soluzione mostrata nella demo. */
   solution: string
-  /** Cosa si può provare davvero nella demo: solo comportamenti verificati. */
+  /** Cosa si può provare davvero nella demo, o si vede fare nel video: solo comportamenti verificati. */
   canTry: string[]
   /** Per un concept: quello che nella demo è simulato o assente. Per un prodotto: le scelte tecniche. */
   toUse: string[]
@@ -248,56 +255,188 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'studio-professionale',
-    title: 'Sito per uno studio professionale',
+    slug: 'linea-outdoor',
+    title: 'Sito con preventivo guidato per pergole, serramenti e tende',
     category: 'Sito aziendale',
     kind: 'concept',
-    action: { href: '/demo/studio-legale', label: 'Apri la demo' },
-    brand: 'Marcucci & Partners',
+    brand: 'Linea Outdoor',
     blurb:
-      'Per uno studio professionale che deve far capire subito di cosa si occupa e come lo si contatta.',
+      'Il cliente sceglie la soluzione, indica misure e località e allega le foto del terrazzo: all’azienda arriva una richiesta di preventivo già completa, pronta per fissare il sopralluogo.',
     audience:
-      'Studi legali, commercialisti, consulenti: attività che vendono competenza e vengono scelte dopo una lettura veloce.',
+      'Aziende che progettano e installano pergole bioclimatiche, serramenti e tende da sole, e lavorano su misura: ogni preventivo dipende dallo spazio del cliente.',
     need:
-      'Chi cerca un professionista vuole sapere in pochi secondi se è il posto giusto, chi ci lavora e come si fa a parlarne. Molti siti di settore mettono prima la storia dello studio e lasciano i recapiti in fondo.',
+      'In questo settore il primo contatto arriva quasi sempre incompleto: «vorrei un preventivo per una pergola», senza misure, senza foto, senza località. Prima di poter rispondere servono due o tre telefonate, e intanto il cliente che stava confrontando più aziende ha già scelto.',
     solution:
-      'Una pagina sola, in cui l’ordine è la risposta: settore e territorio in apertura, poi le quattro aree di attività descritte per materia, il modo di lavorare in tre passaggi, le persone con foro e specializzazione, e in chiusura recapiti e orari in chiaro.',
+      'Un sito costruito attorno al preventivo. Il catalogo presenta pergole, serramenti e tende con immagini e caratteristiche chiare, i progetti illustrativi aiutano a immaginare il risultato, e ogni pagina porta alla richiesta guidata. In quattro passaggi — soluzione, spazio, contatti, riepilogo — il cliente sceglie il prodotto, indica misure e comune, allega le foto e dice quando vorrebbe installare, con il riassunto del progetto che si aggiorna a ogni scelta. Nell’area del titolare la richiesta arriva già ordinata, con lo stato e la proposta di sopralluogo.',
     canTry: [
-      'Leggere le quattro aree di attività, ciascuna con il perimetro concreto',
-      'Scorrere la scheda delle persone con materia e foro di appartenenza',
-      'Usare la navigazione in alto: le voci portano alle sezioni della stessa pagina',
-      'Vedere recapiti, indirizzo e orari senza passare da un modulo',
+      'Homepage, catalogo delle soluzioni e una pagina per ciascun prodotto, con struttura, copertura, configurazione e dimensioni',
+      'Progetti illustrativi che raccontano materiali e contesto, ciascuno con il proprio invito alla richiesta',
+      'La pagina dell’azienda, con il metodo di lavoro in tre passaggi: ascolto, valutazione, sopralluogo',
+      'Richiesta di preventivo guidata in quattro passaggi, con l’avanzamento sempre visibile',
+      'Scelta della soluzione e misure indicative di larghezza e profondità',
+      'Comune di installazione e fotografie del terrazzo allegate alla richiesta',
+      'Tempistiche di installazione, recapiti e una nota libera sul progetto',
+      'Il riquadro «Il tuo progetto, in breve», che si aggiorna a ogni passaggio, e un controllo finale prima dell’invio',
+      'Area del titolare con le richieste ricevute e i contatori: ricevute, da contattare, sopralluoghi confermati',
+      'La scheda di ogni richiesta, con prodotto, misure, foto e contatti, lo stato e la proposta di sopralluogo da salvare',
+      'Lo stesso percorso da telefono, con menu e richiesta pensati per lo schermo piccolo',
     ],
     toUse: [
-      'Il pulsante «Fissa un primo incontro» porta alla sezione contatti: non è un sistema di prenotazione e non apre un calendario',
-      'Non c’è un modulo di contatto: serve decidere il canale (email, telefono, modulo) e collegarlo a una casella reale',
-      'Nomi, indirizzo, recapiti e aree sono di esempio e vanno sostituiti con i dati dello studio',
-      'Testi, foto delle persone ed eventuali pagine aggiuntive (privacy, note legali) sono da preparare',
+      'Nome, logo, prodotti e testi sono di esempio e le fotografie sono illustrative: si sostituiscono con quelli dell’azienda e con le foto dei lavori veri',
+      'Il catalogo si adatta all’assortimento reale: famiglie di prodotto, caratteristiche e domande del modulo',
+      'Nella demo la richiesta resta salvata nel browser: per l’uso reale va collegata a una casella email o al gestionale, così arriva subito a chi deve rispondere',
+      'L’area del titolare diventa un accesso riservato, con le credenziali dell’azienda',
+      'Servono un dominio intestato all’azienda e le pagine di privacy e cookie',
     ],
+    video: {
+      src: '/video/linea-outdoor-presentazione.mp4',
+      poster: '/img/linea-outdoor-cover',
+      posterWidths: [640, 960, 1280],
+      posterAlt:
+        'La prima schermata del sito Linea Outdoor: una pergola bioclimatica su un terrazzo al tramonto e il titolo «Il tuo spazio all’aperto, progettato intorno a te».',
+      duration: '1:30',
+    },
     shots: [
       {
-        base: '/img/demo-legale-desktop',
+        base: '/img/linea-outdoor-home',
         widths: [800, 1200, 1600],
-        alt: 'Schermata iniziale del sito dello studio legale: titolo, descrizione dello studio e dati di fondazione su fondo avorio.',
-        ratio: '16/10',
+        alt: 'La homepage di Linea Outdoor: una pergola bioclimatica sul terrazzo e l’invito a raccontare il proprio progetto.',
+        ratio: '48/25',
       },
       {
-        base: '/img/demo-legale-scroll',
+        base: '/img/linea-outdoor-soluzioni',
         widths: [800, 1200, 1600],
-        alt: 'Sezione “Aree di attività” del sito, con quattro voci affiancate e le rispettive descrizioni.',
-        ratio: '16/10',
+        alt: 'Il catalogo «Spazio alla tua idea»: pergole bioclimatiche, serramenti e tende da sole, ciascuno con la sua pagina.',
+        ratio: '48/25',
       },
       {
-        base: '/img/demo-legale-detail',
+        base: '/img/linea-outdoor-pergola',
         widths: [800, 1200, 1600],
-        alt: 'Sezione “Persone” del sito, con tre professionisti, materia e foro di appartenenza.',
-        ratio: '16/10',
+        alt: 'La pagina della pergola bioclimatica: struttura, copertura, configurazione, dimensioni e richiesta di preventivo.',
+        ratio: '48/25',
       },
       {
-        base: '/img/demo-legale-mobile',
-        widths: [390, 780],
-        alt: 'Lo stesso sito su telefono: titolo, descrizione e pulsante per fissare il primo incontro.',
-        ratio: '9/19',
+        base: '/img/linea-outdoor-progetto',
+        widths: [800, 1200, 1600],
+        alt: 'Un progetto illustrativo: un terrazzo con pergola antracite, raccontato con immagine, soluzione e contesto.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/linea-outdoor-richiesta',
+        widths: [800, 1200, 1600],
+        alt: 'Il primo passaggio della richiesta: la soluzione scelta e le misure indicative, con il riassunto del progetto accanto.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/linea-outdoor-riepilogo',
+        widths: [800, 1200, 1600],
+        alt: 'Il controllo prima dell’invio: soluzione e misure, comune e tempistiche, recapiti e le due foto del terrazzo.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/linea-outdoor-titolare',
+        widths: [800, 1200, 1600],
+        alt: 'L’area del titolare: la richiesta ricevuta con misure, foto e contatti, lo stato e la proposta di sopralluogo.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/linea-outdoor-mobile',
+        widths: [800, 1200, 1600],
+        alt: 'Il sito su telefono: la stessa homepage nel suo layout mobile.',
+        ratio: '48/25',
+      },
+    ],
+  },
+  {
+    slug: 'casale-aurora',
+    title: 'Sito con prenotazione diretta per agriturismi e B&B',
+    category: 'Sito con prenotazioni',
+    kind: 'concept',
+    brand: 'Casale Aurora',
+    blurb:
+      'Date, ospiti, alloggio e prezzo voce per voce: l’ospite prenota direttamente dal sito della struttura, senza passare da un portale e senza sorprese sul totale.',
+    audience:
+      'Agriturismi, B&B, case vacanza e piccole strutture con poche camere, che oggi ricevono gran parte delle prenotazioni dai portali.',
+    need:
+      'Chi sceglie dove dormire guarda foto, dotazioni e prezzo, poi prenota dove è più semplice: spesso un portale, che trattiene una commissione su ogni notte e si tiene il contatto con l’ospite. Molti siti di piccole strutture si fermano a una galleria e a un numero di telefono, e la prenotazione finisce altrove.',
+    solution:
+      'Un sito che accompagna l’ospite dalla prima foto alla prenotazione. In apertura si scelgono subito date e numero di ospiti; ogni alloggio ha la sua pagina con fotografie, dotazioni e tariffa; servizi, galleria, dintorni, indicazioni e domande frequenti rispondono ai dubbi prima che diventino telefonate. Il motore mostra gli alloggi disponibili, scompone il prezzo — notti, colazione, tassa di soggiorno — e chiude la prenotazione in tre passaggi, con un codice di riferimento. Il titolare ritrova tutto nella sua area: alloggio, date, ospiti e importo.',
+    canTry: [
+      'Ricerca per date di arrivo e partenza e numero di ospiti, già dalla prima schermata',
+      'Una pagina per ogni alloggio, con fotografie, metratura, ospiti, dotazioni, tariffa per notte e orari di check-in e check-out',
+      'Servizi, galleria fotografica, esperienze nei dintorni e indicazioni per arrivare',
+      'Domande frequenti e condizioni di soggiorno, da leggere prima di prenotare',
+      'La disponibilità degli alloggi per le date scelte, ciascuno con il suo prezzo',
+      'Il prezzo voce per voce — notti, colazione, tassa di soggiorno — con il totale sempre visibile accanto al modulo',
+      'Prenotazione in tre passaggi: il soggiorno, i dati dell’ospite, il riepilogo con l’accettazione delle condizioni',
+      'Conferma con il codice di riferimento della prenotazione',
+      'Area del titolare con le prenotazioni ricevute, gli importi e il dettaglio di ogni soggiorno',
+      'Ricerca e prenotazione anche da telefono, con un’interfaccia pensata per lo schermo piccolo',
+    ],
+    toUse: [
+      'Nome, testi, prezzi e condizioni sono di esempio e le fotografie sono illustrative, generate con IA: si sostituiscono con quelli della struttura',
+      'Disponibilità e prenotazioni vanno collegate al gestionale della struttura, così il calendario resta allineato con i portali',
+      'Nella demo non si paga: si decide se chiedere un acconto online, con quale servizio di pagamento, o il saldo in struttura',
+      'Le email di conferma all’ospite e di avviso al titolare vanno collegate a una casella reale',
+      'L’area del titolare diventa un accesso riservato, con le credenziali della struttura',
+      'Servono un dominio intestato alla struttura e le pagine di privacy, cookie e condizioni di soggiorno',
+    ],
+    video: {
+      src: '/video/casale-aurora-presentazione.mp4',
+      poster: '/img/casale-aurora-cover',
+      posterWidths: [640, 960, 1280],
+      posterAlt:
+        'La prima schermata del sito Casale Aurora: il casale in pietra tra ulivi e cipressi e, sotto, la ricerca per date e ospiti.',
+      duration: '1:30',
+    },
+    shots: [
+      {
+        base: '/img/casale-aurora-home',
+        widths: [800, 1200, 1600],
+        alt: 'La homepage di Casale Aurora: il casale nella campagna e, subito sotto, la ricerca per date e ospiti.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/casale-aurora-alloggi',
+        widths: [800, 1200, 1600],
+        alt: 'Gli alloggi: Camera Ulivo e Appartamento Limone, con metratura, ospiti, colazione e prezzo per notte.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/casale-aurora-camera',
+        widths: [800, 1200, 1600],
+        alt: 'La pagina di Camera Ulivo: fotografia, dotazioni, tariffa e orari di check-in e check-out.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/casale-aurora-galleria',
+        widths: [800, 1200, 1600],
+        alt: 'La galleria «Uno sguardo al soggiorno»: il casale e il giardino, la camera, la colazione.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/casale-aurora-disponibilita',
+        widths: [800, 1200, 1600],
+        alt: 'La disponibilità per le date scelte: gli alloggi liberi dal 12 al 15 giugno per due adulti, ciascuno con il suo prezzo.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/casale-aurora-prezzo',
+        widths: [800, 1200, 1600],
+        alt: 'Il prezzo voce per voce: tre notti, colazione inclusa e tassa di soggiorno, con il totale accanto.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/casale-aurora-prenotazioni',
+        widths: [800, 1200, 1600],
+        alt: 'L’area del titolare: le prenotazioni ricevute, con alloggio, date, ospiti, importo e stato.',
+        ratio: '48/25',
+      },
+      {
+        base: '/img/casale-aurora-mobile',
+        widths: [800, 1200, 1600],
+        alt: 'Il sito su telefono: la homepage con la ricerca per date e ospiti.',
+        ratio: '48/25',
       },
     ],
   },
@@ -353,62 +492,6 @@ export const projects: Project[] = [
         base: '/img/demo-shop-mobile',
         widths: [390, 780],
         alt: 'Il catalogo del negozio su telefono, con le schede prodotto incolonnate.',
-        ratio: '9/19',
-      },
-    ],
-  },
-  {
-    slug: 'dashboard-gestionale',
-    title: 'Gestionale per piccole attività',
-    category: 'Strumento di lavoro',
-    kind: 'concept',
-    action: { href: '/demo/bottega', label: 'Apri la demo' },
-    brand: 'Bottega',
-    blurb:
-      'Per chi oggi tiene clienti, lavori e scadenze su più fogli di calcolo e vuole una vista unica.',
-    audience:
-      'Piccole attività e studi che seguono pochi lavori alla volta, con una persona che deve sapere ogni giorno come stanno andando.',
-    need:
-      'Le informazioni finiscono divise fra fogli di calcolo, email e il gestionale della fatturazione. Ricostruire lo stato di un lavoro vuol dire aprire tre strumenti e fidarsi dell’ultimo aggiornamento fatto a mano.',
-    solution:
-      'Una schermata costruita sulle quattro domande ricorrenti — quanto ho fatturato, cosa è aperto, cosa devo fatturare, cosa scade — invece che sulle tabelle disponibili. Gli indicatori in alto sono la somma delle righe sotto, il fatturato per mese ha il picco in evidenza e una riga che dice cosa è successo.',
-    canTry: [
-      'Passare fra le tre viste: Panoramica, Lavori, Scadenze',
-      'Leggere i quattro indicatori, calcolati dalle righe della tabella sottostante',
-      'Guardare il fatturato per mese con il mese migliore in evidenza',
-      'Scorrere la tabella dei lavori con referente, scadenza, stato e valore, e l’elenco delle scadenze',
-    ],
-    toUse: [
-      'I dati sono fissi nel codice: non si inseriscono, non si modificano e non si salva nulla',
-      'La tabella non è ordinabile né filtrabile: è una lettura, non uno strumento di gestione',
-      'Non ci sono accessi né ruoli: il nome in basso a sinistra è un’etichetta, non un utente autenticato',
-      'Le voci Clienti, Fatture e Impostazioni sono presenti nel menu ma non attive',
-      'Non esistono esportazioni, stampe né collegamenti con gestionali o fogli di calcolo esistenti',
-      'Per un uso reale servono una base dati, gli accessi e la decisione su quali dati entrano e da dove',
-    ],
-    shots: [
-      {
-        base: '/img/demo-dashboard-desktop',
-        widths: [800, 1200, 1600],
-        alt: 'Panoramica del gestionale: quattro indicatori, grafico del fatturato per mese e tabella dei lavori in corso.',
-        ratio: '16/10',
-      },
-      {
-        base: '/img/demo-dashboard-scroll',
-        widths: [800, 1200, 1600],
-        alt: 'Tabella dei lavori del gestionale con cliente, referente, scadenza, stato e valore.',
-        ratio: '16/10',
-      },
-      {
-        base: '/img/demo-dashboard-detail',
-        widths: [800, 1200, 1600],
-        alt: 'Elenco delle prossime scadenze del gestionale, con responsabile e termine accanto a ciascuna.',
-        ratio: '16/10',
-      },
-      {
-        base: '/img/demo-dashboard-mobile',
-        widths: [390, 780],
-        alt: 'Il gestionale su telefono: menu in linea, indicatori incolonnati e grafico del fatturato.',
         ratio: '9/19',
       },
     ],

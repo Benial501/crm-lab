@@ -6,9 +6,7 @@ import { Home } from './pages/Home'
 import { ProjectDetail } from './pages/ProjectDetail'
 import { Privacy } from './pages/Privacy'
 import { NotFound } from './pages/NotFound'
-import { LegalDemo } from './demos/LegalDemo'
 import { ShopDemo } from './demos/ShopDemo'
-import { DashboardDemo } from './demos/DashboardDemo'
 import './demos/demos.css'
 
 /** Al cambio pagina si riparte dall'alto, salvo quando si punta a una sezione. */
@@ -63,9 +61,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route element={<DemoLayout />}>
-          <Route path="/demo/studio-legale" element={<LegalDemo />} />
           <Route path="/demo/orso-nero" element={<ShopDemo />} />
-          <Route path="/demo/bottega" element={<DashboardDemo />} />
         </Route>
       </Routes>
     </>

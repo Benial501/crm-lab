@@ -1,4 +1,4 @@
-/* Cattura le schermate reali delle tre demo e le prepara in WebP + JPEG
+/* Cattura le schermate reali della demo Orso Nero e le prepara in WebP + JPEG
    alle larghezze dichiarate in src/data/projects.ts. */
 import { chromium } from 'playwright'
 import { execFileSync } from 'node:child_process'
@@ -13,18 +13,10 @@ rmSync(TMP, { recursive: true, force: true })
 mkdirSync(TMP, { recursive: true })
 
 const jobs = [
-  { url: '/demo/studio-legale', name: 'demo-legale-desktop', w: 1440, h: 900, scrollTo: 0, widths: [800, 1200, 1600] },
-  { url: '/demo/studio-legale', name: 'demo-legale-scroll', w: 1440, h: 900, scrollTo: 1150, widths: [800, 1200, 1600] },
-  { url: '/demo/studio-legale', name: 'demo-legale-detail', w: 1440, h: 900, scrollTo: 2350, widths: [800, 1200, 1600] },
-  { url: '/demo/studio-legale', name: 'demo-legale-mobile', w: 390, h: 823, scrollTo: 0, widths: [390, 780] },
   { url: '/demo/orso-nero', name: 'demo-shop-desktop', w: 1440, h: 900, scrollTo: 0, widths: [800, 1200, 1600] },
   { url: '/demo/orso-nero', name: 'demo-shop-scroll', w: 1440, h: 900, scrollTo: 820, widths: [800, 1200, 1600] },
   { url: '/demo/orso-nero', name: 'demo-shop-detail', w: 1440, h: 900, scrollTo: 1750, widths: [800, 1200, 1600] },
   { url: '/demo/orso-nero', name: 'demo-shop-mobile', w: 390, h: 823, scrollTo: 700, widths: [390, 780] },
-  { url: '/demo/bottega', name: 'demo-dashboard-desktop', w: 1440, h: 900, scrollTo: 0, widths: [800, 1200, 1600] },
-  { url: '/demo/bottega', name: 'demo-dashboard-scroll', w: 1440, h: 900, scrollTo: 620, widths: [800, 1200, 1600] },
-  { url: '/demo/bottega', name: 'demo-dashboard-detail', w: 1440, h: 900, scrollTo: 1250, widths: [800, 1200, 1600] },
-  { url: '/demo/bottega', name: 'demo-dashboard-mobile', w: 390, h: 823, scrollTo: 0, widths: [390, 780] },
 ]
 
 const browser = await chromium.launch()

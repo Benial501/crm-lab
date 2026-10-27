@@ -24,8 +24,15 @@ export function ProjectDetail() {
   if (!project) return <Navigate to="/404" replace />
 
   const others = projects.filter((p) => p.slug !== project.slug)
-  const wide = project.shots.filter((s) => s.ratio === '16/10')
+  const wide = project.shots.filter((s) => s.ratio !== '9/19')
   const phone = project.shots.find((s) => s.ratio === '9/19')
+  // Senza demo né indirizzo pubblico il progetto si vede nel video: il
+  // passo successivo, allora, è chiederne uno uguale.
+  const status = !project.action
+    ? 'Mostrato nel video di presentazione'
+    : project.action.external
+      ? 'Online al suo indirizzo'
+      : 'Navigabile su questo sito'
 
   return (
     <article className="case band">
@@ -48,7 +55,12 @@ export function ProjectDetail() {
             )}
             <p className="t-lead case__intro">{project.blurb}</p>
             <p className="case__actions">
-              {project.action.external ? (
+              {!project.action ? (
+                <a href="/#contatti" className="btn" onClick={goToSection('/#contatti')}>
+                  Richiedi un sito simile
+                  <Icon name="arrow" size={16} className="btn__arrow" />
+                </a>
+              ) : project.action.external ? (
                 <a
                   href={project.action.href}
                   className="btn"
@@ -111,7 +123,7 @@ export function ProjectDetail() {
             </div>
             <div>
               <dt>Stato</dt>
-              <dd>{project.action.external ? 'Online al suo indirizzo' : 'Navigabile su questo sito'}</dd>
+              <dd>{status}</dd>
             </div>
           </dl>
         </div>
@@ -163,9 +175,11 @@ export function ProjectDetail() {
         <div className="case__columns">
           <Reveal as="section">
             <h2 className="case__h2">
-              {project.kind === 'concept'
-                ? 'Cosa puoi provare nella demo'
-                : 'Funzionalità'}
+              {project.kind === 'prodotto'
+                ? 'Funzionalità'
+                : project.action
+                  ? 'Cosa puoi provare nella demo'
+                  : 'Cosa fa il sito'}
             </h2>
             <ul className="case__list">
               {project.canTry.map((item) => (
@@ -214,6 +228,9 @@ export function ProjectDetail() {
                     widths={other.shots[0].widths}
                     alt={other.shots[0].alt}
                     sizes="(min-width: 760px) 44vw, 92vw"
+                    // Un fotogramma da video è più largo della miniatura: si
+                    // taglia a destra, così logo e titolo del sito restano interi.
+                    position={other.shots[0].ratio === '48/25' ? 'left top' : undefined}
                     className="case__next-img"
                   />
                   <span className="case__next-text">

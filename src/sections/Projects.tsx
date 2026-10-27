@@ -74,7 +74,7 @@ export function Projects() {
                         Vedi progetto
                         <Icon name="arrow" size={16} className="btn__arrow" />
                       </Link>
-                      {project.action.external ? (
+                      {!project.action ? null : project.action.external ? (
                         <a
                           href={project.action.href}
                           className="link"
