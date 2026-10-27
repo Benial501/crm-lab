@@ -19,15 +19,16 @@
    --------------------------------------------------------------- */
 
 export type Shot = {
-  /** Percorso senza suffisso di larghezza, es. "/img/demo-shop-desktop". */
+  /** Percorso senza suffisso di larghezza, es. "/img/atelier-home". */
   base: string
   widths: number[]
   alt: string
   /**
    * Proporzione del fotogramma, per riservare lo spazio prima del caricamento.
-   * 48/25 è un fotogramma 16:9 senza la fascia dei sottotitoli del video.
+   * 48/25 è un fotogramma 16:9 senza la fascia dei sottotitoli del video;
+   * 2/1 è il riquadro del sito nel video di ATELIER, senza titoli né sottotitoli.
    */
-  ratio: '16/10' | '48/25' | '9/19'
+  ratio: '16/10' | '48/25' | '2/1' | '9/19'
 }
 
 export type Video = {
@@ -441,58 +442,124 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'ecommerce-indipendente',
-    title: 'E-commerce per un brand indipendente',
-    category: 'Vendita online',
+    slug: 'atelier',
+    title: 'Negozio online collegato al gestionale per negozi di abbigliamento',
+    category: 'E-commerce e gestionale',
     kind: 'concept',
-    action: { href: '/demo/orso-nero', label: 'Apri la demo' },
-    brand: 'Orso Nero',
+    brand: 'ATELIER',
     blurb:
-      'Per chi vende pochi prodotti curati e vuole un negozio costruito sul catalogo corto, non su un modello da migliaia di articoli.',
+      'Un negozio online che non vive a parte: ogni ordine del sito arriva nel pannello del negozio, scala le stesse scorte del banco e si prepara, si spedisce e si segue fino al cliente.',
     audience:
-      'Produttori e rivenditori con un catalogo ristretto: torrefazioni, laboratori, piccoli marchi che cambiano spesso le referenze.',
+      'Negozi di abbigliamento, boutique e sartorie con un punto vendita fisico, che vogliono vendere anche online senza tenere due magazzini e due elenchi di ordini. Lo stesso schema vale per chi vende articoli a varianti: taglie, colori, misure.',
     need:
-      'Con pochi prodotti i modelli da e-commerce sembrano vuoti: griglie pensate per centinaia di articoli, filtri inutili e schede che non spiegano perché un prodotto costa quello che costa.',
+      'Quando un negozio apre il suo sito, spesso il sito resta un mondo a parte: gli ordini arrivano per email e vanno ricopiati, la giacenza online non sa cosa è stato venduto al banco, e il cliente telefona per sapere dov’è il suo pacco. Ogni vendita in più diventa lavoro doppio, con il rischio di vendere online una taglia che in negozio è già finita.',
     solution:
-      'Il ritmo della produzione diventa l’argomento di vendita fin dalla prima riga. Un filtro solo, sul metodo di estrazione, perché è la sola domanda che il cliente si pone. Il carrello resta in testata con quantità e totale, e ogni prodotto mostra origine e note di degustazione.',
+      'Un negozio online e un gestionale costruiti insieme, sugli stessi dati. Il cliente sfoglia la collezione, cerca un capo, sceglie colore e taglia vedendo la disponibilità di quella variante e compra con i dati già salvati nel suo account. L’ordine compare subito nel pannello del commerciante con cliente, capi e consegna: si avvia la preparazione, si spunta il capo prelevato, si inseriscono corriere e codice di tracciamento, e il cliente ritrova lo stesso ordine nella sua area, con lo stato aggiornato. Dallo stesso pannello si gestiscono catalogo e prezzi, magazzino e carichi, report per il commercialista, statistiche, messaggi automatici e vendite al banco, con un’unica giacenza fra sito e negozio.',
     canTry: [
-      'Filtrare il catalogo per metodo: tutti, filtro, espresso',
-      'Aggiungere prodotti al carrello e vedere quantità e totale aggiornarsi in testata',
-      'Leggere origine, note di degustazione e prezzo di ciascuna delle sei referenze',
-      'Scorrere la sezione che spiega il catalogo corto con i suoi numeri',
+      'Vetrina e collezione con filtri per taglia disponibile e colore, e ricerca diretta del capo',
+      'Scheda del capo con immagini, descrizione, tessuto, colori e taglie italiane, con la disponibilità riferita alla variante scelta',
+      'Carrello e cassa con i dati dell’account già compilati, codice sconto e scelta fra spedizione con corriere e ritiro in negozio',
+      'Area cliente con lo storico degli ordini e l’avanzamento di ciascuno — ricevuto, in preparazione, spedito, consegnato — che si aggiorna da solo',
+      'Pannello del negozio con la situazione del giorno: ordini da preparare, varianti sotto soglia, avvisi e ultimi ordini da sito e negozio',
+      'Il dettaglio di ogni ordine: capi da preparare con colore e taglia, cliente e consegna, e il percorso dell’ordine passo per passo',
+      'Preparazione e spedizione: capo prelevato, corriere e codice di tracciamento, ordine segnato come spedito e visibile al cliente',
+      'Catalogo: nuovo capo con categoria, prezzo, descrizione, tessuto, immagini, varianti e giacenza iniziale; un prezzo modificato si vede subito in vetrina',
+      'Magazzino con le giacenze per variante, il filtro delle scorte basse, il carico della merce in arrivo e il registro dei movimenti',
+      'Vendite e report filtrati per periodo e canale, con l’esportazione in CSV da condividere con il commercialista',
+      'Statistiche: andamento giorno per giorno, capi più richiesti e confronto fra sito e negozio',
+      'Messaggi automatici — conferma d’ordine, avviso al negozio, scorte in esaurimento, spedizione — raccolti nella posta simulata',
+      'Negozio fisico: vendita al banco sulle stesse scorte del sito, prove richieste dal sito e ritiro in sede',
     ],
     toUse: [
-      'Il carrello è simulato: non esiste una pagina di riepilogo, non si rimuovono prodotti e non si arriva a un pagamento',
-      'Nessun pagamento reale è collegato: serve un provider (commissioni e verifiche a suo carico) e le relative pagine',
-      'Spedizioni, disponibilità e gestione degli ordini non sono gestite: vanno definite e collegate',
-      'L’abbonamento mensile è una voce del catalogo, non un flusso di sottoscrizione ricorrente',
-      'Non c’è una scheda prodotto separata: se serve, va progettata',
-      'Prodotti, prezzi, numeri e immagini sono di esempio; le etichette sono disegnate in CSS al posto di fotografie',
+      'ATELIER è un negozio inventato: nome, capi, prezzi, clienti e ordini sono di esempio e le immagini dei capi sono illustrative; si sostituiscono con il catalogo e le fotografie del negozio',
+      'Nella demo l’acquisto è simulato e non c’è addebito: va scelto e collegato un servizio di pagamento, con le sue commissioni',
+      'Corriere e codice di tracciamento sono dimostrativi: si collega il servizio di spedizione scelto, oppure si registrano a mano i dati del corriere',
+      'I messaggi automatici restano nella posta simulata: per arrivare a clienti e negozio vanno collegati a una casella email reale',
+      'Report e CSV organizzano i dati da consultare e condividere: non emettono scontrini o documenti fiscali e non sostituiscono gli adempimenti',
+      'Se il negozio usa già un gestionale o un registratore di cassa, si valuta come collegarli, così le scorte restano allineate',
+      'L’accesso dei clienti, che nella demo non chiede password, va completato; il pannello resta riservato al titolare e al personale',
+      'Servono un dominio intestato al negozio e le pagine di privacy, cookie, condizioni di vendita e recesso',
     ],
+    video: {
+      src: '/video/atelier-presentazione.mp4',
+      poster: '/img/atelier-cover',
+      posterWidths: [640, 960, 1280],
+      posterAlt:
+        'La homepage di ATELIER: il titolo «La giacca giusta si sceglie con calma.» accanto a una giacca in velluto a coste color tabacco.',
+      duration: '4:34',
+    },
     shots: [
       {
-        base: '/img/demo-shop-desktop',
+        base: '/img/atelier-home',
         widths: [800, 1200, 1600],
-        alt: 'Schermata iniziale del negozio: titolo “Tostiamo il martedì, parte il mercoledì” e tre sacchetti disegnati.',
-        ratio: '16/10',
+        alt: 'La homepage di ATELIER: «La giacca giusta si sceglie con calma.», con gli inviti a guardare le giacche e tutta la collezione.',
+        ratio: '2/1',
       },
       {
-        base: '/img/demo-shop-scroll',
+        base: '/img/atelier-prodotto',
         widths: [800, 1200, 1600],
-        alt: 'Catalogo del negozio con sei caffè, filtro per metodo, prezzi e pulsanti per aggiungere al carrello.',
-        ratio: '16/10',
+        alt: 'La scheda della giacca in velluto a coste: colore tabacco, taglia 48 scelta sul metro da sarto e la disponibilità di ogni taglia.',
+        ratio: '2/1',
       },
       {
-        base: '/img/demo-shop-detail',
+        base: '/img/atelier-cassa',
         widths: [800, 1200, 1600],
-        alt: 'Sezione che spiega il catalogo corto, con i tre numeri della torrefazione su fondo scuro.',
-        ratio: '16/10',
+        alt: 'La cassa: i dati della cliente già compilati dal suo account, la scelta fra corriere e ritiro in negozio e il riepilogo con il totale.',
+        ratio: '2/1',
       },
       {
-        base: '/img/demo-shop-mobile',
-        widths: [390, 780],
-        alt: 'Il catalogo del negozio su telefono, con le schede prodotto incolonnate.',
-        ratio: '9/19',
+        base: '/img/atelier-panoramica',
+        widths: [800, 1200, 1600],
+        alt: '«Il negozio, oggi»: ordini da preparare, in preparazione, varianti sotto soglia, avvisi da leggere e gli ultimi ordini da sito e negozio.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-ordine',
+        widths: [800, 1200, 1600],
+        alt: 'L’ordine 1229 nel pannello: il capo da preparare con colore e taglia, cliente e consegna, il percorso dell’ordine e l’avvio della preparazione.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-spedizione',
+        widths: [800, 1200, 1600],
+        alt: 'Lo stesso ordine nell’area della cliente: il pacco è in viaggio, con il corriere e il codice di tracciamento appena inseriti.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-nuovo-capo',
+        widths: [800, 1200, 1600],
+        alt: 'Un nuovo capo: nome, categoria, prezzo, descrizione e tessuto, le immagini caricate e le varianti con la giacenza iniziale.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-magazzino',
+        widths: [800, 1200, 1600],
+        alt: 'Il magazzino: le giacenze per variante filtrate sulle scorte basse e, accanto, il carico della merce in arrivo.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-report',
+        widths: [800, 1200, 1600],
+        alt: 'Vendite e report: periodo e canale, valore degli ordini, vendite da sito e negozio, l’elenco degli ordini e l’esportazione in CSV.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-statistiche',
+        widths: [800, 1200, 1600],
+        alt: 'Le statistiche: l’andamento giorno per giorno, i capi più richiesti e da dove arrivano gli ordini, sito o negozio.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-posta',
+        widths: [800, 1200, 1600],
+        alt: 'La posta simulata: i messaggi preparati dalle automazioni, come l’avviso alla cliente che il suo ordine è in viaggio.',
+        ratio: '2/1',
+      },
+      {
+        base: '/img/atelier-banco',
+        widths: [800, 1200, 1600],
+        alt: '«Anche dietro il banco»: la vendita in negozio sulle stesse scorte del sito e le prove richieste dai clienti online.',
+        ratio: '2/1',
       },
     ],
   },

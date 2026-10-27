@@ -6,8 +6,6 @@ import { Home } from './pages/Home'
 import { ProjectDetail } from './pages/ProjectDetail'
 import { Privacy } from './pages/Privacy'
 import { NotFound } from './pages/NotFound'
-import { ShopDemo } from './demos/ShopDemo'
-import './demos/demos.css'
 
 /** Al cambio pagina si riparte dall'alto, salvo quando si punta a una sezione. */
 function ScrollToTop() {
@@ -37,18 +35,6 @@ function SiteLayout() {
   )
 }
 
-/**
- * Le demo girano senza il telaio del sito: devono poter essere guardate
- * come prodotti a sé, altrimenti non dimostrano niente.
- */
-function DemoLayout() {
-  return (
-    <main id="main">
-      <Outlet />
-    </main>
-  )
-}
-
 export default function App() {
   return (
     <>
@@ -59,9 +45,6 @@ export default function App() {
           <Route path="/progetti/:slug" element={<ProjectDetail />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
-        </Route>
-        <Route element={<DemoLayout />}>
-          <Route path="/demo/orso-nero" element={<ShopDemo />} />
         </Route>
       </Routes>
     </>

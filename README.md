@@ -2,7 +2,7 @@
 
 Sito pubblico di CRM LAB, studio digitale indipendente. La pagina presenta i servizi, il metodo di lavoro e progetti personali e concept dimostrativi.
 
-Realizzato con React, TypeScript e Vite. Le demo interattive sono incluse nel progetto.
+Realizzato con React, TypeScript e Vite. I progetti sono presentati con i loro video e con schermate prese dai video stessi.
 
 ## Avvio in locale
 
