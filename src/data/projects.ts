@@ -293,7 +293,7 @@ export const projects: Project[] = [
       poster: '/img/linea-outdoor-cover',
       posterWidths: [640, 960, 1280],
       posterAlt:
-        'La prima schermata del sito Linea Outdoor: una pergola bioclimatica su un terrazzo al tramonto e il titolo «Il tuo spazio all’aperto, progettato intorno a te».',
+        'Uno smartphone con la homepage di Linea Outdoor su un piano di ardesia, accanto a un profilo in alluminio, un metro, lo schizzo di un terrazzo da 4 × 3 m e i campioni di tessuto; a sinistra la scritta «preventivi outdoor».',
       duration: '1:30',
     },
     shots: [
@@ -386,7 +386,7 @@ export const projects: Project[] = [
       poster: '/img/casale-aurora-cover',
       posterWidths: [640, 960, 1280],
       posterAlt:
-        'La prima schermata del sito Casale Aurora: il casale in pietra tra ulivi e cipressi e, sotto, la ricerca per date e ospiti.',
+        'Uno smartphone con la homepage di Casale Aurora su un tavolo di legno in terrazza, accanto a cappuccino, cornetto, crostata, miele e alla chiave della camera «Ulivo»; a sinistra la scritta «prenotazioni agriturismi».',
       duration: '1:30',
     },
     shots: [

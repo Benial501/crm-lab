@@ -278,10 +278,12 @@
   border-color: var(--hairline-strong);
 }
 
+/* 16:9 come le copertine dei video, che così entrano intere; le schermate
+   perdono solo una striscia in fondo. */
 .case__next-img {
   grid-column: 1 / -1;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: top center;
 }

@@ -220,27 +220,31 @@ export function ProjectDetail() {
             Altri progetti
           </h2>
           <ul>
-            {others.map((other) => (
-              <li key={other.slug}>
-                <Link to={`/progetti/${other.slug}`}>
-                  <Picture
-                    base={other.shots[0].base}
-                    widths={other.shots[0].widths}
-                    alt={other.shots[0].alt}
-                    sizes="(min-width: 760px) 44vw, 92vw"
-                    // Un fotogramma da video è più largo della miniatura: si
-                    // taglia a destra, così logo e titolo del sito restano interi.
-                    position={other.shots[0].ratio === '48/25' ? 'left top' : undefined}
-                    className="case__next-img"
-                  />
-                  <span className="case__next-text">
-                    <span className="case__next-title">{other.title}</span>
-                    <span className="case__next-kind t-small">{other.category}</span>
-                  </span>
-                  <Icon name="arrow" size={18} />
-                </Link>
-              </li>
-            ))}
+            {others.map((other) => {
+              // Dove c'è il video, la miniatura è la sua copertina: la stessa
+              // immagine che il progetto ha in homepage.
+              const thumb = other.video
+                ? { base: other.video.poster, widths: other.video.posterWidths, alt: other.video.posterAlt }
+                : other.shots[0]
+              return (
+                <li key={other.slug}>
+                  <Link to={`/progetti/${other.slug}`}>
+                    <Picture
+                      base={thumb.base}
+                      widths={thumb.widths}
+                      alt={thumb.alt}
+                      sizes="(min-width: 760px) 44vw, 92vw"
+                      className="case__next-img"
+                    />
+                    <span className="case__next-text">
+                      <span className="case__next-title">{other.title}</span>
+                      <span className="case__next-kind t-small">{other.category}</span>
+                    </span>
+                    <Icon name="arrow" size={18} />
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </section>
       </div>
